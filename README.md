@@ -1,3 +1,4 @@
 # Time To Teamplay
 
-Finding appropriate time to work together
+### Finding appropriate time to work together
+---
