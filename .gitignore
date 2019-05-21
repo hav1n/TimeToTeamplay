@@ -1,1 +1,3 @@
 *.numbers
+*.key
+.DS_Store

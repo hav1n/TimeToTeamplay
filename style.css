@@ -1,0 +1,26 @@
+body{
+  margin: 0;
+}
+.main_grid{
+  display: table;
+}
+
+.image_side{
+  display: table-cell;
+  text-align: center;
+  vertical-align: middle;
+  background-color : #7C85FF;
+  width: 50vw;
+  line-height: 100vh;
+  float: left;
+}
+
+.logo{
+  margin: auto;
+  display: block;
+}
+
+.login_side{
+  float: right;
+  width: 50vw;
+}
