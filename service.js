@@ -7,8 +7,11 @@ var app = http.createServer(function(request,response){
     }
     if(request.url == '/favicon.ico'){
       return response.writeHead(404);
+      response.end();
+      return;
     }
     response.writeHead(200);
+    console.log(url);
     response.end(fs.readFileSync(__dirname + url));
 
 });
