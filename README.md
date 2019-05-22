@@ -2,4 +2,4 @@
 
 ### Finding appropriate time to work together
 ---
-**[Check This Page](hav1n.kr)**
+**[Check This Page](http://hav1n.kr)**
