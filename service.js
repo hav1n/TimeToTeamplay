@@ -12,11 +12,18 @@ var app = http.createServer(function(request,response){
     if(pathname === '/')
     {
       if(_url == '/' || queryData.id===undefined){
-        _url = '/html/index.html';
+        _url = '/html/login.html';
       }
       else{
         _url = `/${queryData.id}/${queryData.page}`;
       }
+      response.writeHead(200);
+      console.log(_url);
+      response.end(fs.readFileSync(__dirname+_url));
+    }
+    else if(pathname==='/about' || pathname==='/main' || pathname==='/create')
+    {
+      _url='/html'+pathname+'.html';
       response.writeHead(200);
       console.log(_url);
       response.end(fs.readFileSync(__dirname+_url));
@@ -27,7 +34,7 @@ var app = http.createServer(function(request,response){
       response.end('404 Not found');
     }
 });
-if(args[2]==='80')
+if(args[2]!=undefined&&args[2]==='80')
 {
   app.listen(80);
 }
