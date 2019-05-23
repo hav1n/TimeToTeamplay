@@ -1,6 +1,8 @@
 var http = require('http');
 var fs = require('fs');
 var url = require('url');
+var args = process.argv;
+console.log(args[2]);
 var app = http.createServer(function(request,response){
     var _url = request.url;
     var queryData = url.parse(_url, true).query;
@@ -9,8 +11,8 @@ var app = http.createServer(function(request,response){
     console.log(queryData);
     if(pathname === '/')
     {
-      if(_url == '/'){
-        _url = '/index.html';
+      if(_url == '/' || queryData.id===undefined){
+        _url = '/html/index.html';
       }
       else{
         _url = `/${queryData.id}/${queryData.page}`;
@@ -25,4 +27,10 @@ var app = http.createServer(function(request,response){
       response.end('404 Not found');
     }
 });
-app.listen(8000);
+if(args[2]==='80')
+{
+  app.listen(80);
+}
+else {
+  app.listen(8000);
+}
