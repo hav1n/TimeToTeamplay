@@ -3,116 +3,7 @@ var fs = require('fs');
 var url = require('url');
 var qs = require('querystring');
 var args = process.argv;
-
-function templateHTML(body, id){
-  return `
-  <!doctype html>
-  <html>
-    <head>
-      <meta charset="utf-8">
-      <title>TTT - Time To Teamplay</title>
-      <script type="text/javascript">
-        var u_id="${id}";
-        function initialize(){
-          document.getElementById('user_id').value=u_id;
-        }
-      </script>
-    </head>
-    <body onload="initialize()">
-      ${body}
-    </body>
-  </html>
-  `;
-}
-
-function templateHTML_CSS(title, body){
-  return `
-  <!doctype html>
-  <html>
-    <head>
-      <meta charset="utf-8">
-      <link rel="stylesheet" href="?id=css&page=${title}.css">
-      <title>TTT - Time To Teamplay</title>
-    </head>
-    <body>
-      ${body}
-    </body>
-  </html>
-  `;
-}
-
-function templateHTML2(body, id, page){
-  return `
-  <!doctype html>
-  <html>
-    <head>
-      <meta charset="utf-8">
-      <title>TTT - Time To Teamplay</title>
-      <script type="text/javascript">
-        var u_id="${id}";
-        var u_page="${page}";
-        function input_id(){
-          document.getElementById('user_id').value=u_id;
-        }
-      </script>
-    </head>
-    <body onload="input_id()">
-      <h1>${id}'s Timeline "${page}"</h1>
-      <p><h2>${body}</h2></p>
-      <script>
-        openPage = function(url) {
-          location.href = url+"?id="+u_id+"&page="+u_page;
-        }
-      </script>
-      <p>
-        <a href="javascript:openPage('/update')">update</a>
-        <a href="javascript:openPage('/delete')">delete</a>
-      </p>
-    </body>
-  </html>
-  `;
-}
-
-function templateHTML3(body, id, page, able, old){
-  return `
-  <!doctype html>
-  <html>
-    <head>
-      <meta charset="utf-8">
-      <title>TTT - Time To Teamplay</title>
-      <script type="text/javascript">
-        var u_id="${id}";
-        var u_page="${page}";
-        var u_able="${able}";
-        var u_old="${old}";
-        function initialize(){
-          document.getElementById('user_id').value=u_id;
-          document.getElementById('user_title').value=u_page;
-          document.getElementById('user_able').value=u_able;
-          document.getElementById('user_title_old').value=u_old;
-        }
-      </script>
-    </head>
-    <body onload="initialize()">
-      ${body}
-    </body>
-  </html>
-  `;
-}
-
-function templateList(filelist, id){
-  var list = '<ul>';
-  var i = 0;
-  if(filelist!=undefined){
-    while(i < filelist.length){
-      list = list + `<li><a href="/User_Data?id=${id}&page=${filelist[i]}">${filelist[i]}</a></li>`;
-      i = i + 1;
-    }
-    list = list+'</ul>';
-    return list;
-  }
-  return "";
-}
+var HTMLS = require('./js/HTMLS.js');
 
 console.log(args[2]);
 var app = http.createServer(function(request,response){
@@ -126,7 +17,7 @@ var app = http.createServer(function(request,response){
     if(_url == '/' || queryData.id===undefined){
       fs.readFile(`./html/login.html`, 'utf8', function(err, body){
         var title = 'login';
-        var template = templateHTML_CSS(title, body);
+        var template = HTMLS.HTML_CSS(title, body);
         response.writeHead(200);
         response.end(template);
       });
@@ -143,7 +34,7 @@ var app = http.createServer(function(request,response){
   else if(pathname==='/about' || pathname==='/create')
   {
     fs.readFile(`./html${pathname}.html`, 'utf8', function(err, body){
-      var template = templateHTML(body,queryData.id);
+      var template = HTMLS.HTML(body,queryData.id);
       response.writeHead(200);
       response.end(template);
       _url='/html'+pathname+'.html';
@@ -163,8 +54,8 @@ var app = http.createServer(function(request,response){
       console.log(filelist);
       fs.readFile(`html/main.html`, 'utf8', function(err, body){
         var id = queryData.id;
-        body = body + templateList(filelist,id);
-        var template = templateHTML(body,id);
+        body = body + HTMLS.List(filelist,id);
+        var template = HTMLS.HTML(body,id);
 
         response.writeHead(200);
         response.end(template);
@@ -193,7 +84,7 @@ var app = http.createServer(function(request,response){
   {
     _url = `/User_Data/${queryData.id}/${queryData.page}`;
     fs.readFile(`.${_url}`, 'utf8', function(err, body){
-      var template = templateHTML2(body,queryData.id,queryData.page);
+      var template = HTMLS.HTML2(body,queryData.id,queryData.page);
       response.writeHead(200);
       console.log(_url);
       response.end(template);
@@ -203,7 +94,7 @@ var app = http.createServer(function(request,response){
   {
     fs.readFile(`html/update.html`, 'utf8', function(err, body){
       fs.readFile(`./User_Data/${queryData.id}/${queryData.page}`, 'utf8', function(err, body2){
-        var template = templateHTML3(body,queryData.id,queryData.page,body2,queryData.page);
+        var template = HTMLS.HTML3(body,queryData.id,queryData.page,body2,queryData.page);
         response.writeHead(200);
         response.end(template);
       });
