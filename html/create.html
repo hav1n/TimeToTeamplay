@@ -1,14 +1,6 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="utf-8">
-    <title>TTT - Time To Teamplay</title>
-  </head>
-  <body>
-    <form  action="/main" method="post">
-      <p><input type="text" name="title" value="" placeholder="구분" class="bar"></p>
-      <p><input type="text" name="pw" value="" placeholder="Enter Password" class="bar"></p>
-      <p><input type="submit" name="" value="Upload" class="bar"><br></p>
-    </form>
-  </body>
-</html>
+<form action="/create_table" method="post">
+  <p><input type="text" name="title" placeholder="구분" class="bar"></p>
+  <p><input type="text" name="available" placeholder="가능여부" class="bar"></p>
+  <p><input type="hidden" name="id" id="user_id" value="TEST"></p>
+  <p><input type="submit" value="Upload" class="bar"><br></p>
+</form>
