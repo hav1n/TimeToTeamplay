@@ -127,7 +127,7 @@ var app = http.createServer(function(request,response){
       var title = post.title;
       var available = post.available;
       fs.writeFile(`User_Data/${user_id}/${title}`,available,'utf8',function(err){
-        response.writeHead(302,{Location: `/User_Data?id=${user_id}&page=${title}`});
+        response.writeHead(302,{Location: `/main?id=${user_id}`});
         response.end('Success');
       })
     });
