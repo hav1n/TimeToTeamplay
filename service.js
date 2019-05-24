@@ -13,12 +13,12 @@ function templateHTML(body, id){
       <title>TTT - Time To Teamplay</title>
       <script type="text/javascript">
         var u_id="${id}";
-        function input_id(){
+        function initialize(){
           document.getElementById('user_id').value=u_id;
         }
       </script>
     </head>
-    <body onload="input_id()">
+    <body onload="initialize()">
       ${body}
     </body>
   </html>
@@ -35,6 +35,65 @@ function templateHTML_CSS(title, body){
       <title>TTT - Time To Teamplay</title>
     </head>
     <body>
+      ${body}
+    </body>
+  </html>
+  `;
+}
+
+function templateHTML2(body, id, page){
+  return `
+  <!doctype html>
+  <html>
+    <head>
+      <meta charset="utf-8">
+      <title>TTT - Time To Teamplay</title>
+      <script type="text/javascript">
+        var u_id="${id}";
+        var u_page="${page}";
+        function input_id(){
+          document.getElementById('user_id').value=u_id;
+        }
+      </script>
+    </head>
+    <body onload="input_id()">
+      <h1>${id}'s Timeline "${page}"</h1>
+      <p><h2>${body}</h2></p>
+      <script>
+        openPage = function(url) {
+          location.href = url+"?id="+u_id+"&page="+u_page;
+        }
+      </script>
+      <p>
+        <a href="javascript:openPage('/update')">update</a>
+        <a href="javascript:openPage('/delete')">delete</a>
+      </p>
+    </body>
+  </html>
+  `;
+}
+
+function templateHTML3(body, id, page, able, old){
+  return `
+  <!doctype html>
+  <html>
+    <head>
+      <meta charset="utf-8">
+      <title>TTT - Time To Teamplay</title>
+      <script type="text/javascript">
+        var u_id="${id}";
+        var u_page="${page}";
+        var u_able="${able}";
+        var u_old="${old}";
+        function initialize(){
+          document.getElementById('user_id').value=u_id;
+          document.getElementById('user_title').value=u_page;
+          document.getElementById('user_able').value=u_able;
+          document.getElementById('user_title_old').value=u_old;
+        }
+      </script>
+    </head>
+    <body onload="initialize()">
       ${body}
     </body>
   </html>
@@ -98,7 +157,6 @@ var app = http.createServer(function(request,response){
       fs.mkdirSync('User_Data/'+queryData.id);
       console.log(`${queryData.id} file created`);
     }catch(e){
-      console.log(e);
       if(e.code!='EEXIST')throw e;
     }
     fs.readdir(`./User_Data/${queryData.id}`, function(error, filelist){
@@ -120,7 +178,6 @@ var app = http.createServer(function(request,response){
       body = body + data;
     });
     request.on('end', function(){
-      console.log(body);
       var post = qs.parse(body);
       console.log(post);
       var user_id = post.id;
@@ -128,16 +185,58 @@ var app = http.createServer(function(request,response){
       var available = post.available;
       fs.writeFile(`User_Data/${user_id}/${title}`,available,'utf8',function(err){
         response.writeHead(302,{Location: `/main?id=${user_id}`});
-        response.end('Success');
+        response.end();
       })
     });
   }
   else if(pathname === '/User_Data')
   {
     _url = `/User_Data/${queryData.id}/${queryData.page}`;
-    response.writeHead(200);
-    console.log(_url);
-    response.end(fs.readFileSync(__dirname+_url));
+    fs.readFile(`.${_url}`, 'utf8', function(err, body){
+      var template = templateHTML2(body,queryData.id,queryData.page);
+      response.writeHead(200);
+      console.log(_url);
+      response.end(template);
+    });
+  }
+  else if(pathname === '/update')
+  {
+    fs.readFile(`html/update.html`, 'utf8', function(err, body){
+      fs.readFile(`./User_Data/${queryData.id}/${queryData.page}`, 'utf8', function(err, body2){
+        var template = templateHTML3(body,queryData.id,queryData.page,body2,queryData.page);
+        response.writeHead(200);
+        response.end(template);
+      });
+    });
+  }
+  else if(pathname === '/update_table')
+  {
+    var body = '';
+    request.on('data', function(data){
+      body = body + data;
+    });
+    request.on('end', function(){
+      var post = qs.parse(body);
+      console.log(post);
+      var user_id = post.id;
+      var title = post.title;
+      var available = post.available;
+      var old_title = post.title_old;
+      `User_Data/${user_id}/${title}`
+      fs.rename(`User_Data/${user_id}/${old_title}`, `User_Data/${user_id}/${title}`, function(error){
+        fs.writeFile(`User_Data/${user_id}/${title}`, available, 'utf8', function(err){
+          response.writeHead(302, {Location: `/main?id=${user_id}`});
+          response.end();
+        })
+      });
+    });
+  }
+  else if(pathname === '/delete')
+  {
+    fs.unlink(`User_Data/${queryData.id}/${queryData.page}`, function(error){
+      response.writeHead(302, {Location: `/main?id=${queryData.id}`});
+      response.end();
+    })
   }
   else {
     response.writeHead(404);
