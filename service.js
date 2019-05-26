@@ -132,7 +132,7 @@ var app = http.createServer(function(request,response){
   else {
     response.writeHead(404);
     console.log(_url+" Not Found");
-    response.end('404 Not found');
+    response.end('<h1>404 Not found</h1>');
   }
 });
 if(args[2]!=undefined&&args[2]==='80')
