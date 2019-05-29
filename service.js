@@ -1,144 +1,154 @@
-var http = require('http');
-var fs = require('fs');
-var url = require('url');
-var qs = require('querystring');
-var args = process.argv;
-var HTMLS = require('./js/HTMLS.js');
+const express = require('express')
+const app = express()
+var args = process.argv
+var fs = require('fs')
+var HTMLS = require('./js/HTMLS.js')
+var qs = require('querystring')
+var bodyParser = require('body-parser')
+var compression = require('compression')
 
-console.log(args[2]);
-var app = http.createServer(function(request,response){
-  var _url = request.url;
-  var queryData = url.parse(_url, true).query;
-  var pathname = url.parse(_url, true).pathname;
-  console.log(pathname)
+app.use(express.static('public'))
+app.use(bodyParser.urlencoded({ extended: false }))
+app.use(compression())
 
-  if(pathname === '/')
-  {
-    if(_url == '/' || queryData.id===undefined){
-      fs.readFile(`./html/login.html`, 'utf8', function(err, body){
-        var title = 'login';
-        var template = HTMLS.HTML_CSS(title, body);
-        response.writeHead(200);
-        response.end(template);
-      });
-      _url = '/html/login.html';
-      console.log(_url);
-    }
-    else{
-      _url = `/${queryData.id}/${queryData.page}`;
-      response.writeHead(200);
-      console.log(_url);
-      response.end(fs.readFileSync(__dirname+_url));
-    }
-  }
-  else if(pathname==='/about' || pathname==='/create')
-  {
-    fs.readFile(`./html${pathname}.html`, 'utf8', function(err, body){
-      var template = HTMLS.HTML(body,queryData.id);
-      response.writeHead(200);
-      response.end(template);
-      _url='/html'+pathname+'.html';
-      console.log(_url);
-    });
-  }
-  else if(pathname==='/main')
-  {
-    console.log(queryData.id);
-    try{
-      fs.mkdirSync('User_Data/'+queryData.id);
-      console.log(`${queryData.id} file created`);
-    }catch(e){
-      if(e.code!='EEXIST')throw e;
-    }
-    fs.readdir(`./User_Data/${queryData.id}`, function(error, filelist){
-      console.log(filelist);
-      fs.readFile(`html/main.html`, 'utf8', function(err, body){
-        var id = queryData.id;
-        body = body + HTMLS.List(filelist,id);
-        var template = HTMLS.HTML(body,id);
+var num = 0;
+app.use(function (request, response, next) {
+    var ip = request.headers['x-forwarded-for'] || request.connection.remoteAddress
+    var method = request.method
+    var url = request.url
 
-        response.writeHead(200);
-        response.end(template);
-      });
-    });
+    console.log((++num) + ". IP " + ip + " " + method + " " + url)
+    next()
+})
+
+app.get('/', function(request, response){
+  fs.readFile(`./html/login.html`, 'utf8', function(err, body){
+    var title = 'login'
+    var template = HTMLS.HTML_login(title, body)
+    response.send(template)
+  })
+})
+/*
+app.get('/css/:cssid', function(request, response){
+  var cssid = request.params.cssid
+  _url = `/css/${cssid}.css`
+  response.send(fs.readFileSync(__dirname+_url))
+})
+
+app.get('/images/:imgid', function(request, response){
+  var imgid = request.params.imgid
+  _url = `/images/${imgid}`
+  response.send(fs.readFileSync(__dirname+_url));
+})
+*/
+app.get('/about', function(request, response){
+  fs.readFile(`./html/about.html`, 'utf8', function(err, body){
+    var title = 'about'
+    var template = HTMLS.HTML_about(title, body)
+    response.send(template)
+  })
+  _url='/html/about.html'
+})
+
+app.post('/main', function(request, response){
+  var post = request.body
+  var user_id = post.id
+  try{
+    fs.mkdirSync('User_Data/'+user_id);
+    console.log(`${user_id} file created`)
+  }catch(e){
+    if(e.code!='EEXIST')throw e
   }
-  else if(pathname==='/create_table')
-  {
-    var body = '';
-    request.on('data', function(data){
-      body = body + data;
-    });
-    request.on('end', function(){
-      var post = qs.parse(body);
-      console.log(post);
-      var user_id = post.id;
-      var title = post.title;
-      var available = post.available;
-      fs.writeFile(`User_Data/${user_id}/${title}`,available,'utf8',function(err){
-        response.writeHead(302,{Location: `/main?id=${user_id}`});
-        response.end();
-      })
-    });
-  }
-  else if(pathname === '/User_Data')
-  {
-    _url = `/User_Data/${queryData.id}/${queryData.page}`;
-    fs.readFile(`.${_url}`, 'utf8', function(err, body){
-      var template = HTMLS.HTML2(body,queryData.id,queryData.page);
-      response.writeHead(200);
-      console.log(_url);
-      response.end(template);
-    });
-  }
-  else if(pathname === '/update')
-  {
-    fs.readFile(`html/update.html`, 'utf8', function(err, body){
-      fs.readFile(`./User_Data/${queryData.id}/${queryData.page}`, 'utf8', function(err, body2){
-        var template = HTMLS.HTML3(body,queryData.id,queryData.page,body2,queryData.page);
-        response.writeHead(200);
-        response.end(template);
-      });
-    });
-  }
-  else if(pathname === '/update_table')
-  {
-    var body = '';
-    request.on('data', function(data){
-      body = body + data;
-    });
-    request.on('end', function(){
-      var post = qs.parse(body);
-      console.log(post);
-      var user_id = post.id;
-      var title = post.title;
-      var available = post.available;
-      var old_title = post.title_old;
-      `User_Data/${user_id}/${title}`
-      fs.rename(`User_Data/${user_id}/${old_title}`, `User_Data/${user_id}/${title}`, function(error){
-        fs.writeFile(`User_Data/${user_id}/${title}`, available, 'utf8', function(err){
-          response.writeHead(302, {Location: `/main?id=${user_id}`});
-          response.end();
-        })
-      });
-    });
-  }
-  else if(pathname === '/delete')
-  {
-    fs.unlink(`User_Data/${queryData.id}/${queryData.page}`, function(error){
-      response.writeHead(302, {Location: `/main?id=${queryData.id}`});
-      response.end();
+  fs.readdir(`./User_Data/${user_id}`, function(error, filelist){
+    fs.readFile(`html/main.html`, 'utf8', function(err, body){
+      body = body + HTMLS.List(filelist,user_id)
+      var template = HTMLS.HTML(body,user_id)
+      response.send(template)
     })
+  })
+})
+
+app.get('/main/:userid', function(request, response){
+  var user_id = request.params.userid
+  try{
+    fs.mkdirSync('User_Data/'+user_id);
+    console.log(`${user_id} file created`)
+  }catch(e){
+    if(e.code!='EEXIST')throw e
   }
-  else {
-    response.writeHead(404);
-    console.log(_url+" Not Found");
-    response.end('<h1>404 Not found</h1>');
-  }
-});
+  fs.readdir(`./User_Data/${user_id}`, function(error, filelist){
+    fs.readFile(`html/main.html`, 'utf8', function(err, body){
+      body = body + HTMLS.List(filelist,user_id)
+      var template = HTMLS.HTML(body,user_id)
+      response.send(template)
+    })
+  })
+})
+
+app.get('/User_Data/:userid/:page', function(request, response){
+  var user_id = request.params.userid
+  var page = request.params.page
+  _url = `/User_Data/${user_id}/${page}`;
+  fs.readFile(`.${_url}`, 'utf8', function(err, body){
+    var template = HTMLS.HTML2(body,user_id,page)
+    response.send(template)
+  })
+})
+
+app.get('/create/:userid', function(request, response){
+  var user_id = request.params.userid
+  fs.readFile(`./html/create.html`, 'utf8', function(err, body){
+    var template = HTMLS.HTML(body,user_id);
+    response.send(template);
+  });
+})
+
+app.post('/create_table', function(request, response){
+  var post = request.body
+  var user_id = post.id
+  var title = post.title
+  var available = post.available
+  fs.writeFile(`User_Data/${user_id}/${title}`,available,'utf8',function(err){
+    response.redirect(`/main/${user_id}`)
+  })
+})
+
+app.get('/update/:userid/:page',function(request,response){
+  var user_id = request.params.userid
+  var page = request.params.page
+  fs.readFile(`html/update.html`, 'utf8', function(err, body){
+    fs.readFile(`./User_Data/${user_id}/${page}`, 'utf8', function(err, body2){
+      var template = HTMLS.HTML3(body,user_id,page,body2,page)
+      response.send(template)
+    })
+  })
+})
+
+app.post('/update_table',function(request,response){
+  var post = request.body
+  var user_id = post.id
+  var title = post.title
+  var available = post.available
+  var old_title = post.title_old
+  fs.rename(`User_Data/${user_id}/${old_title}`, `User_Data/${user_id}/${title}`, function(error){
+    fs.writeFile(`User_Data/${user_id}/${title}`, available, 'utf8', function(err){
+      response.redirect(`/main/${user_id}`)
+    })
+  })
+})
+
+app.get('/delete/:userid/:page', function(request, response){
+  var user_id = request.params.userid
+  var page = request.params.page
+  fs.unlink(`User_Data/${user_id}/${page}`, function(error){
+    response.redirect(`/main/${user_id}`)
+  })
+})
+
 if(args[2]!=undefined&&args[2]==='80')
 {
-  app.listen(80);
+  app.listen(80, () => console.log('[+]App Listening on port 80'))
 }
 else {
-  app.listen(8000);
+  app.listen(8000, () => console.log('[+]App Listening on port 8000'))
 }

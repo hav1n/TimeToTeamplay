@@ -20,7 +20,23 @@ module.exports = {
     `;
   },
 
-  HTML_CSS:function(title, body){
+  HTML_login:function(title, body){
+    return `
+    <!doctype html>
+    <html>
+      <head>
+        <meta charset="utf-8">
+        <link rel="stylesheet" href="/css/${title}.css">
+        <title>TTT - Time To Teamplay</title>
+      </head>
+      <body>
+        ${body}
+      </body>
+    </html>
+    `;
+  },
+
+  HTML_about:function(title, body){
     return `
     <!doctype html>
     <html>
@@ -56,7 +72,7 @@ module.exports = {
         <p><h2>${body}</h2></p>
         <script>
           openPage = function(url) {
-            location.href = url+"?id="+u_id+"&page="+u_page;
+            location.href = url+"/"+u_id+"/"+u_page;
           }
         </script>
         <p>
@@ -100,7 +116,7 @@ module.exports = {
     var i = 0;
     if(filelist!=undefined){
       while(i < filelist.length){
-        list = list + `<li><a href="/User_Data?id=${id}&page=${filelist[i]}">${filelist[i]}</a></li>`;
+        list = list + `<li><a href="/User_Data/${id}/${filelist[i]}">${filelist[i]}</a></li>`;
         i = i + 1;
       }
       list = list+'</ul>';
