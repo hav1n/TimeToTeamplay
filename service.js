@@ -28,19 +28,7 @@ app.get('/', function(request, response){
     response.send(template)
   })
 })
-/*
-app.get('/css/:cssid', function(request, response){
-  var cssid = request.params.cssid
-  _url = `/css/${cssid}.css`
-  response.send(fs.readFileSync(__dirname+_url))
-})
 
-app.get('/images/:imgid', function(request, response){
-  var imgid = request.params.imgid
-  _url = `/images/${imgid}`
-  response.send(fs.readFileSync(__dirname+_url));
-})
-*/
 app.get('/about', function(request, response){
   fs.readFile(`./html/about.html`, 'utf8', function(err, body){
     var title = 'about'
