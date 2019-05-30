@@ -72,7 +72,7 @@ module.exports = {
         <p><h2>${body}</h2></p>
         <script>
           openPage = function(url) {
-            location.href = url+"/"+u_id+"/"+u_page;
+            location.href = url+"/"+u_page;
           }
         </script>
         <p>
@@ -111,12 +111,12 @@ module.exports = {
     `;
   },
 
-  List:function(filelist, id){
+  List:function(filelist){
     var list = '<ul>';
     var i = 0;
     if(filelist!=undefined){
       while(i < filelist.length){
-        list = list + `<li><a href="/User_Data/${id}/${filelist[i]}">${filelist[i]}</a></li>`;
+        list = list + `<li><a href="/User_Data/${filelist[i]}">${filelist[i]}</a></li>`;
         i = i + 1;
       }
       list = list+'</ul>';

@@ -1,5 +1,7 @@
 *.numbers
 *.key
 .DS_Store
-User_Data
 *.sh
+sessions
+User_Data
+ecosystem.config.js
