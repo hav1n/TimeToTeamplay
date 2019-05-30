@@ -133,6 +133,10 @@ app.get('/delete/:userid/:page', function(request, response){
   })
 })
 
+app.use(function(request, response, next) {
+  response.status(404).send('<h1>404 not found</h1>')
+})
+
 if(args[2]!=undefined&&args[2]==='80')
 {
   app.listen(80, () => console.log('[+]App Listening on port 80'))
