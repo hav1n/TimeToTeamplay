@@ -84,7 +84,7 @@ module.exports = {
     `;
   },
 
-  HTML3:function(body, id, page, able, old){
+  HTML3:function(body, page, able, old){
     return `
     <!doctype html>
     <html>
@@ -92,12 +92,10 @@ module.exports = {
         <meta charset="utf-8">
         <title>TTT - Time To Teamplay</title>
         <script type="text/javascript">
-          var u_id="${id}";
           var u_page="${page}";
           var u_able="${able}";
           var u_old="${old}";
           function initialize(){
-            document.getElementById('user_id').value=u_id;
             document.getElementById('user_title').value=u_page;
             document.getElementById('user_able').value=u_able;
             document.getElementById('user_title_old').value=u_old;

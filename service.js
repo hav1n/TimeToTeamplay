@@ -189,7 +189,7 @@ app.get('/update/:page',function(request,response){
   var page = request.params.page
   fs.readFile(`html/update.html`, 'utf8', function(err, body){
     fs.readFile(`./User_Data/${user_id}/${page}`, 'utf8', function(err, body2){
-      var template = HTMLS.HTML3(body,user_id,page,body2,page)
+      var template = HTMLS.HTML3(body,page,body2,page)
       response.send(template)
     })
   })
