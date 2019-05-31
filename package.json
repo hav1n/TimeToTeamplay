@@ -4,15 +4,20 @@
   "description": "Search time to teamplay for users",
   "main": "service.js",
   "dependencies": {
+    "bcrypt": "^3.0.6",
     "body-parser": "^1.19.0",
     "compression": "^1.7.4",
     "connect-flash": "^0.1.1",
     "cookie": "^0.4.0",
     "express": "^4.17.1",
     "express-session": "^1.16.1",
+    "lowdb": "^1.0.0",
+    "mysql": "^2.17.1",
     "passport": "^0.4.0",
     "passport-local": "^1.0.0",
-    "session-file-store": "^1.2.0"
+    "session-file-store": "^1.2.0",
+    "shortid": "^2.2.14",
+    "sqlite3": "^4.0.8"
   },
   "devDependencies": {},
   "scripts": {

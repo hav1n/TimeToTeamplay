@@ -42,7 +42,7 @@ module.exports = {
     <html>
       <head>
         <meta charset="utf-8">
-        <link rel="stylesheet" href="?id=css&page=${title}.css">
+        <link rel="stylesheet" href="/css/${title}.css">
         <title>TTT - Time To Teamplay</title>
       </head>
       <body>
@@ -52,7 +52,7 @@ module.exports = {
     `;
   },
 
-  HTML2:function(body, id, page){
+  HTML2:function(body, id, page, pid){
     return `
     <!doctype html>
     <html>
@@ -62,6 +62,7 @@ module.exports = {
         <script type="text/javascript">
           var u_id="${id}";
           var u_page="${page}";
+          var id="${pid}";
           function input_id(){
             document.getElementById('user_id').value=u_id;
           }
@@ -72,7 +73,7 @@ module.exports = {
         <p><h2>${body}</h2></p>
         <script>
           openPage = function(url) {
-            location.href = url+"/"+u_page;
+            location.href = url+"/"+id;
           }
         </script>
         <p>
@@ -84,7 +85,7 @@ module.exports = {
     `;
   },
 
-  HTML3:function(body, page, able, old){
+  HTML3:function(body, page, able, pid){
     return `
     <!doctype html>
     <html>
@@ -94,11 +95,11 @@ module.exports = {
         <script type="text/javascript">
           var u_page="${page}";
           var u_able="${able}";
-          var u_old="${old}";
+          var pid="${pid}";
           function initialize(){
             document.getElementById('user_title').value=u_page;
             document.getElementById('user_able').value=u_able;
-            document.getElementById('user_title_old').value=u_old;
+            document.getElementById('pid').value=pid;
           }
         </script>
       </head>
@@ -110,16 +111,16 @@ module.exports = {
   },
 
   List:function(filelist){
-    var list = '<ul>';
-    var i = 0;
+    var list = '<ul>'
+    var i = 0
     if(filelist!=undefined){
       while(i < filelist.length){
-        list = list + `<li><a href="/User_Data/${filelist[i]}">${filelist[i]}</a></li>`;
-        i = i + 1;
+        list = list + `<li><a href="/User/${filelist[i].id}">${filelist[i].title}</a></li>`
+        i = i + 1
       }
-      list = list+'</ul>';
-      return list;
+      list = list+'</ul>'
+      return list
     }
-    return "";
+    return ""
   }
 }

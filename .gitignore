@@ -5,3 +5,5 @@
 sessions
 User_Data
 ecosystem.config.js
+db.json
+db
