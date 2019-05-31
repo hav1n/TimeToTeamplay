@@ -28,7 +28,7 @@ var low = require('lowdb')
 var FileSync = require('lowdb/adapters/FileSync')
 var adapter = new FileSync('db.json')
 var db = low(adapter)
-db.defaults({users:[], tables:[]}).write()
+db.defaults({users:[], tables:[], events:[]}).write()
 // lowdb
 
 app.use(express.static('public'))
@@ -180,9 +180,16 @@ app.get('/main', function(request, response){
     return;
   }
   var user_id = request.user.id
-  var filelist = db.get('tables').filter({ user:user_id }).value()
+  var tablelist = db.get('tables').filter({ user:user_id }).value()
+  var eventlist = db.get('events').value()
+  var fmsg = request.flash()
   fs.readFile(`html/main.html`, 'utf8', function(err, body){
-    body = body + HTMLS.List(filelist)
+    if(fmsg.error)
+    {
+      body += `<script type="text/javascript">alert("${fmsg.error}");</script>`
+    }
+    body = body + HTMLS.tableList(tablelist)
+    body = body + HTMLS.eventList(eventlist, user_id)
     var template = HTMLS.HTML(body,user_id)
     response.send(template)
   })
@@ -196,6 +203,17 @@ app.get('/User/:page', function(request, response){
   var page = request.params.page
   var body = db.get('tables').find({id:page}).value()
   var template = HTMLS.HTML2(body.available,body.user,body.title,page)
+  response.send(template)
+})
+
+app.get('/Event/:page', function(request, response){
+  if(!authIsOwner(request, response)){
+    response.redirect('/')
+    return;
+  }
+  var page = request.params.page
+  var body = db.get('events').find({id:page}).value()
+  var template = HTMLS.HTML4(body.part,body.owner,body.title,page)
   response.send(template)
 })
 
@@ -240,7 +258,7 @@ app.get('/update/:page',function(request,response){
     request.flash('error', 'Not yours!')
     return response.redirect('/')
   }
-  var title = tables.title;
+  var title = tables.title
   var available = tables.available
   var user_id = request.user.id
   var page = request.params.page
@@ -278,6 +296,69 @@ app.get('/delete/:page', function(request, response){
   }
   db.get('tables').remove({id:request.params.page}).write()
   response.redirect('/')
+})
+
+app.get('/make', function(request, response){
+  if(!authIsOwner(request, response)){
+    response.redirect('/')
+    return;
+  }
+  var user_id = request.user.id
+  fs.readFile(`./html/make.html`, 'utf8', function(err, body){
+    var template = HTMLS.HTML(body,user_id);
+    response.send(template);
+  });
+})
+
+app.post('/make_event',function(request, response){
+  var post = request.body
+  var owner = request.user.id
+  var title = post.title
+  var id = shortid.generate()
+  var part = [owner]
+  db.get('events').push({
+    id:id,
+    owner:owner,
+    title:title,
+    part:part
+  }).write()
+  response.redirect(`/main`)
+})
+
+app.get('/join',function(request, response){
+  if(!authIsOwner(request, response)){
+    response.redirect('/')
+    return;
+  }
+  var user_id = request.user.id
+  fs.readFile(`./html/join.html`, 'utf8', function(err, body){
+    var template = HTMLS.HTML(body,user_id);
+    response.send(template);
+  });
+})
+
+app.post('/join_event',function(request, response){
+  var post = request.body
+  var id = post.id
+  var events = db.get('events').find({id:id}).value()
+  if(!events){
+    request.flash('error', 'Wrong ID!')
+    return response.redirect('/')
+  }
+  /*
+  if(events.part.includes())
+  var owner = request.user.id
+  var title = post.title
+  var id = shortid.generate()
+  var part = [owner]
+  db.get('events').push({
+    id:id,
+    owner:owner,
+    title:title,
+    part:part
+  }).write()
+  */
+  response.redirect(`/main`)
 })
 
 app.get('/admin', function(request, response){
