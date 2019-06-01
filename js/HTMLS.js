@@ -110,7 +110,7 @@ module.exports = {
     `;
   },
 
-  HTML4:function(body, id, page, pid){
+  HTML4:function(body, id, page, pid, select){
     return `
     <!doctype html>
     <html>
@@ -130,14 +130,14 @@ module.exports = {
         <h1>${id}'s event "${page}"</h1>
         <p><h3>input ${pid} to join</h3></p>
         <p><h2>Participants : ${body}</h2></p>
+        ${select}
         <script>
           openPage = function(url) {
             location.href = url+"/"+id;
           }
         </script>
         <p>
-          <a href="javascript:openPage('/event/update')">update</a>
-          <a href="javascript:openPage('/event/delete')">delete</a>
+          <a href="javascript:openPage('/delete_event')">delete</a>
         </p>
       </body>
     </html>
