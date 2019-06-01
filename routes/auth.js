@@ -11,11 +11,6 @@ var cookie = require('cookie')
 var session = require('express-session')
 var FileStore = require('session-file-store')(session)
 
-var low = require('lowdb')
-var FileSync = require('lowdb/adapters/FileSync')
-var adapter = new FileSync('db.json')
-var db = low(adapter)
-
 router.use(passport.initialize())
 router.use(passport.session())
 
