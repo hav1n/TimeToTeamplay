@@ -155,7 +155,7 @@ module.exports = {
       list = list+'</ul>'
       return list
     }
-    return ""
+    return list
   },
 
   eventList:function(filelist,u_id){
@@ -172,6 +172,6 @@ module.exports = {
       list = list+'</ul>'
       return list
     }
-    return ""
+    return list
   }
 }
