@@ -8,7 +8,7 @@
     <div class="login_box">
       <img src="/images/24-hours.png" alt="login logo" width="100px" class="login_logo">
       <h1>Login</h1>
-      <form action="/login_process" method='post'>
+      <form action="/auth/login_process" method='post'>
         <p>Username</p>
         <input type="text" name="id" placeholder="Enter Username" class="bar" required>
         <p>Password</p>
@@ -16,7 +16,7 @@
         <p><input type="submit" name="" value="login" class="bar"></p>
         <p id="Remember"><input type="checkbox" name="Remember me" value="">Remember me</p>
       </form>
-      <p id="account"><a href="/register">Make new account</a> | <a href="#">Lost your password?</a></p>
+      <p id="account"><a href="/auth/register">Make new account</a> | <a href="#">Lost your password?</a></p>
       <p id="info"><a href="/about">About Us</a></p>
     </div>
   </div>

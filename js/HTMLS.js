@@ -77,8 +77,8 @@ module.exports = {
           }
         </script>
         <p>
-          <a href="javascript:openPage('/update')">update</a>
-          <a href="javascript:openPage('/delete')">delete</a>
+          <a href="javascript:openPage('/table/update')">update</a>
+          <a href="javascript:openPage('/table/delete')">delete</a>
         </p>
       </body>
     </html>
@@ -137,7 +137,7 @@ module.exports = {
           }
         </script>
         <p>
-          <a href="javascript:openPage('/delete_event')">delete</a>
+          <a href="javascript:openPage('/event/delete')">delete</a>
         </p>
       </body>
     </html>
@@ -149,7 +149,7 @@ module.exports = {
     var i = 0
     if(filelist!=undefined){
       while(i < filelist.length){
-        list = list + `<li><a href="/User/${filelist[i].id}">${filelist[i].title}</a></li>`
+        list = list + `<li><a href="/table/User/${filelist[i].id}">${filelist[i].title}</a></li>`
         i = i + 1
       }
       list = list+'</ul>'
@@ -165,7 +165,7 @@ module.exports = {
       list = list + '<ul>'
       while(i < filelist.length){
         if(filelist[i].part.includes(u_id)){
-          list = list + `<li><a href="/Event/${filelist[i].id}">${filelist[i].title}</a></li>`
+          list = list + `<li><a href="/event/User/${filelist[i].id}">${filelist[i].title}</a></li>`
         }
         i = i + 1
       }
