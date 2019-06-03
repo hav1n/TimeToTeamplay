@@ -15,7 +15,6 @@ var cookie = require('cookie')
 var session = require('express-session')
 var FileStore = require('session-file-store')(session)
 var flash = require('connect-flash')
-
 var tableRouter = require('./routes/table.js')
 var eventRouter = require('./routes/event.js')
 var authRouter = require('./routes/auth.js')
@@ -33,14 +32,20 @@ app.use(passport.session())
 app.use(flash())
 app.use(favicon(path.join(__dirname, 'public/images', 'favicon.ico')))
 
-var num = 0
-app.use(function (request, response, next) {
-    var ip = request.headers['x-forwarded-for'] || request.connection.remoteAddress
-    var method = request.method
-    var url = request.url
+function addZero(data){
+return (data<10) ? "0"+data : data;
+}
 
-    console.log((++num) + ". IP " + ip + " " + method + " " + url)
-    next()
+app.use(function (request, response, next) {
+  var timeInMs = Date.now()
+  var date = new Date(timeInMs)
+
+  var ip = request.headers['x-forwarded-for'] || request.connection.remoteAddress
+  var method = request.method
+  var url = request.url
+
+  console.log(`${date.getFullYear()}/${addZero(date.getMonth()+1)}/${addZero(date.getDate())} ${addZero(date.getHours())}:${addZero(date.getMinutes())}:${addZero(date.getSeconds())} ${ip} ${method} ${url}`)
+  next()
 })
 
 app.use(express.static('public'))
