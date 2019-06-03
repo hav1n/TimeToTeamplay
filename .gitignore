@@ -1,9 +1,9 @@
 .DS_Store
-backend/*.numbers
-backend/*.key
-backend/.DS_Store
-backend/*.sh
-backend/sessions
-backend/ecosystem.config.js
-backend/db.json
-backend/node_modules
+*.numbers
+*.key
+.DS_Store
+*.sh
+sessions
+ecosystem.config.js
+db.json
+node_modules
