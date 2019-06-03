@@ -9,7 +9,7 @@ var shortid = require('shortid')
 router.get('/User/:page', function(request, response){
   if(!LIB.authIsOwner(request, response)){
     response.redirect('/')
-    return;
+    return
   }
   var page = request.params.page
   var body = db.get('events').find({id:page}).value()
@@ -36,20 +36,20 @@ router.get('/User/:page', function(request, response){
     }
     i = i + 1
   }
-  var template = HTMLS.HTML4(body.part,body.owner,body.title,page,select)
+  var template = HTMLS.HTML_event(body.part,body.owner,body.title,page,select)
   response.send(template)
 })
 
 router.get('/make', function(request, response){
   if(!LIB.authIsOwner(request, response)){
     response.redirect('/')
-    return;
+    return
   }
   var user_id = request.user.id
   fs.readFile(`./html/make.html`, 'utf8', function(err, body){
-    var template = HTMLS.HTML(body,user_id);
-    response.send(template);
-  });
+    var template = HTMLS.HTML_base('make',body)
+    response.send(template)
+  })
 })
 
 router.post('/make_event',function(request, response){
@@ -72,13 +72,13 @@ router.post('/make_event',function(request, response){
 router.get('/join',function(request, response){
   if(!LIB.authIsOwner(request, response)){
     response.redirect('/')
-    return;
+    return
   }
   var user_id = request.user.id
   fs.readFile(`./html/join.html`, 'utf8', function(err, body){
-    var template = HTMLS.HTML(body,user_id);
-    response.send(template);
-  });
+    var template = HTMLS.HTML_base('join',body)
+    response.send(template)
+  })
 })
 
 router.post('/join_event',function(request, response){
@@ -94,10 +94,10 @@ router.post('/join_event',function(request, response){
     return response.redirect('/')
   }
   events.part.push(request.user.id)
-  events.table.push("0");
+  events.table.push("0")
   db.get('events').find({id:id}).assign({
     part:events.part,table:events.table
-  }).write();
+  }).write()
   response.redirect(`/main`)
 })
 
@@ -117,14 +117,14 @@ router.post('/update/:page',function(request, response){
   }
   db.get('events').find({id:eid}).assign({
     table:events.table
-  }).write();
+  }).write()
   response.redirect(`/event/User/${eid}`)
 })
 
 router.get('/delete/:page',function(request,response){
   if(!LIB.authIsOwner(request, response)){
     response.redirect('/')
-    return;
+    return
   }
   var events = db.get('events').find({id:request.params.page}).value()
   if(events.owner !== request.user.id){
@@ -135,4 +135,4 @@ router.get('/delete/:page',function(request,response){
   response.redirect('/')
 })
 
-module.exports = router;
+module.exports = router

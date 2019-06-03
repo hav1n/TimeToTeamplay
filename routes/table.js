@@ -9,30 +9,30 @@ var shortid = require('shortid')
 router.get('/User/:page', function(request, response){
   if(!LIB.authIsOwner(request, response)){
     response.redirect('/')
-    return;
+    return
   }
   var page = request.params.page
   var body = db.get('tables').find({id:page}).value()
-  var template = HTMLS.HTML2(body.available,body.user,body.title,page)
+  var template = HTMLS.HTML_table(body.available,body.user,body.title,page)
   response.send(template)
 })
 
 router.get('/create', function(request, response){
   if(!LIB.authIsOwner(request, response)){
     response.redirect('/')
-    return;
+    return
   }
   var user_id = request.user.id
   fs.readFile(`./html/create.html`, 'utf8', function(err, body){
-    var template = HTMLS.HTML(body,user_id);
-    response.send(template);
-  });
+    var template = HTMLS.HTML_base('create',body)
+    response.send(template)
+  })
 })
 
 router.post('/create_table', function(request, response){
   if(!LIB.authIsOwner(request, response)){
     response.redirect('/')
-    return;
+    return
   }
   var post = request.body
   var user_id = request.user.id
@@ -64,7 +64,7 @@ router.get('/update/:page',function(request,response){
   var user_id = request.user.id
   var page = request.params.page
   fs.readFile(`html/update.html`, 'utf8', function(err, body){
-    var template = HTMLS.HTML3(body,title,available,tables.id)
+    var template = HTMLS.HTML_update(body,title,available,tables.id)
     response.send(template)
   })
 })
@@ -72,7 +72,7 @@ router.get('/update/:page',function(request,response){
 router.post('/update_table',function(request,response){
   if(!LIB.authIsOwner(request, response)){
     response.redirect('/')
-    return;
+    return
   }
   var post = request.body
   var user_id = request.user.id
@@ -81,14 +81,14 @@ router.post('/update_table',function(request,response){
   var id = post.id
   db.get('tables').find({id:id}).assign({
     title:title, available:available
-  }).write();
+  }).write()
   response.redirect(`/main`)
 })
 
 router.get('/delete/:page', function(request, response){
   if(!LIB.authIsOwner(request, response)){
     response.redirect('/')
-    return;
+    return
   }
   var tables = db.get('tables').find({id:request.params.page}).value()
   if(tables.user !== request.user.id){
@@ -99,4 +99,4 @@ router.get('/delete/:page', function(request, response){
   response.redirect('/')
 })
 
-module.exports = router;
+module.exports = router

@@ -1,10 +1,28 @@
 module.exports = {
-  HTML:function(body, id){
+  //base HTML
+  HTML_base:function(title, body){
     return `
     <!doctype html>
     <html>
       <head>
         <meta charset="utf-8">
+        <link rel="stylesheet" href="/css/${title}.css">
+        <title>TTT - Time To Teamplay</title>
+      </head>
+      <body>
+        ${body}
+      </body>
+    </html>
+    `
+  },
+  //main page HTML
+  HTML_main:function(body, id){
+    return `
+    <!doctype html>
+    <html>
+      <head>
+        <meta charset="utf-8">
+        <link rel="stylesheet" href="/css/main.css">
         <title>TTT - Time To Teamplay</title>
         <script type="text/javascript">
           var u_id="${id}";
@@ -17,50 +35,18 @@ module.exports = {
         ${body}
       </body>
     </html>
-    `;
+    `
   },
 
-  HTML_login:function(title, body){
+  HTML_table:function(body, id, page, pid){
     return `
     <!doctype html>
     <html>
       <head>
         <meta charset="utf-8">
-        <link rel="stylesheet" href="/css/${title}.css">
-        <title>TTT - Time To Teamplay</title>
-      </head>
-      <body>
-        ${body}
-      </body>
-    </html>
-    `;
-  },
-
-  HTML_about:function(title, body){
-    return `
-    <!doctype html>
-    <html>
-      <head>
-        <meta charset="utf-8">
-        <link rel="stylesheet" href="/css/${title}.css">
-        <title>TTT - Time To Teamplay</title>
-      </head>
-      <body>
-        ${body}
-      </body>
-    </html>
-    `;
-  },
-
-  HTML2:function(body, id, page, pid){
-    return `
-    <!doctype html>
-    <html>
-      <head>
-        <meta charset="utf-8">
+        <link rel="stylesheet" href="/css/table.css">
         <title>TTT - Time To Teamplay</title>
         <script type="text/javascript">
-          var u_id="${id}";
           var u_page="${page}";
           var id="${pid}";
           function input_id(){
@@ -69,7 +55,7 @@ module.exports = {
         </script>
       </head>
       <body onload="input_id()">
-        <h1>${id}'s Timeline "${page}"</h1>
+        <h1>${id}'s Timetable "${page}"</h1>
         <p><h2>${body}</h2></p>
         <script>
           openPage = function(url) {
@@ -82,15 +68,16 @@ module.exports = {
         </p>
       </body>
     </html>
-    `;
+    `
   },
 
-  HTML3:function(body, page, able, pid){
+  HTML_update:function(body, page, able, pid){
     return `
     <!doctype html>
     <html>
       <head>
         <meta charset="utf-8">
+        <link rel="stylesheet" href="/css/update.css">
         <title>TTT - Time To Teamplay</title>
         <script type="text/javascript">
           var u_page="${page}";
@@ -107,19 +94,18 @@ module.exports = {
         ${body}
       </body>
     </html>
-    `;
+    `
   },
 
-  HTML4:function(body, id, page, pid, select){
+  HTML_event:function(body, id, page, pid, select){
     return `
     <!doctype html>
     <html>
       <head>
         <meta charset="utf-8">
+        <link rel="stylesheet" href="/css/update.css">
         <title>TTT - Time To Teamplay</title>
         <script type="text/javascript">
-          var u_id="${id}";
-          var u_page="${page}";
           var id="${pid}";
           function input_id(){
             document.getElementById('user_id').value=u_id;
@@ -141,7 +127,7 @@ module.exports = {
         </p>
       </body>
     </html>
-    `;
+    `
   },
 
   tableList:function(filelist){

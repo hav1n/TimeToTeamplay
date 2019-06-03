@@ -3,8 +3,6 @@
 .DS_Store
 *.sh
 sessions
-User_Data
 ecosystem.config.js
 db.json
-db
 node_modules

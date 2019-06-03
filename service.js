@@ -5,6 +5,8 @@ var fs = require('fs')
 var HTMLS = require('./js/HTMLS.js')
 var LIB = require('./js/lib.js')
 var db = require('./js/db.js')
+var favicon = require('serve-favicon')
+var path = require('path')
 var bodyParser = require('body-parser')
 var compression = require('compression')
 var passport = require('passport')
@@ -18,7 +20,6 @@ var tableRouter = require('./routes/table.js')
 var eventRouter = require('./routes/event.js')
 var authRouter = require('./routes/auth.js')
 
-app.use(express.static('public'))
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(compression())
 app.use(session({
@@ -30,8 +31,9 @@ app.use(session({
 app.use(passport.initialize())
 app.use(passport.session())
 app.use(flash())
+app.use(favicon(path.join(__dirname, 'public/images', 'favicon.ico')))
 
-var num = 0;
+var num = 0
 app.use(function (request, response, next) {
     var ip = request.headers['x-forwarded-for'] || request.connection.remoteAddress
     var method = request.method
@@ -41,6 +43,7 @@ app.use(function (request, response, next) {
     next()
 })
 
+app.use(express.static('public'))
 app.use('/table', tableRouter)
 app.use('/event', eventRouter)
 app.use('/auth', authRouter)
@@ -48,11 +51,11 @@ app.use('/auth', authRouter)
 app.get('/', function(request, response){
   if(LIB.authIsOwner(request, response)){
     response.redirect('/main')
-    return;
+    return
   }
   fs.readFile(`./html/login.html`, 'utf8', function(err, body){
     var title = 'login'
-    var template = HTMLS.HTML_login(title, body)
+    var template = HTMLS.HTML_base(title, body)
     var fmsg = request.flash()
     if(fmsg.error)
     {
@@ -65,7 +68,7 @@ app.get('/', function(request, response){
 app.get('/about', function(request, response){
   fs.readFile(`./html/about.html`, 'utf8', function(err, body){
     var title = 'about'
-    var template = HTMLS.HTML_about(title, body)
+    var template = HTMLS.HTML_base(title, body)
     response.send(template)
   })
   _url='/html/about.html'
@@ -74,7 +77,7 @@ app.get('/about', function(request, response){
 app.get('/main', function(request, response){
   if(!LIB.authIsOwner(request, response)){
     response.redirect('/')
-    return;
+    return
   }
   var user_id = request.user.id
   var tablelist = db.get('tables').filter({ user:user_id }).value()
@@ -87,7 +90,7 @@ app.get('/main', function(request, response){
     }
     body = body + HTMLS.tableList(tablelist)
     body = body + HTMLS.eventList(eventlist, user_id)
-    var template = HTMLS.HTML(body,user_id)
+    var template = HTMLS.HTML_main(body,user_id)
     response.send(template)
   })
 })
