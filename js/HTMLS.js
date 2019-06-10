@@ -97,7 +97,7 @@ module.exports = {
     `
   },
 
-  HTML_event:function(body, id, page, pid, select){
+  HTML_event:function(body, id, page, pid, select, size){
     return `
     <!doctype html>
     <html>
@@ -108,7 +108,20 @@ module.exports = {
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
         <script src="/javascript/event.js"></script>
         <script type="text/javascript">
+        $(function(){
           var id="${pid}";
+          var size=${size}+1;
+          for(i=0;i<size;i++)
+          {
+            var now_id = '#sp'+String(i);
+            var table_class = '.hl'+String(i);
+            var alpha = i/size;
+            var rgbaCol = 'rgba(124,133,255,'+alpha+')';
+            console.log(rgbaCol);
+  	        $(now_id).css("background-color",colors[i]);
+            $(table_class).css("background-color",colors[i]);
+          }
+        });
         </script>
       </head>
       <body>

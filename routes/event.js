@@ -18,6 +18,7 @@ router.get('/User/:page', function(request, response){
   <select name="table">
     <option value="">시간표 선택</option>`
   var i=0
+  var group_ab = {}
   if(table!=undefined){
     while(i < table.length){
       select += `<option value="${table[i].id}">${table[i].title}</option>`
@@ -30,7 +31,7 @@ router.get('/User/:page', function(request, response){
   while(i < events.part.length){
     table = db.get('tables').find({id:events.table[i]}).value()
     if(table){
-      select += `<div><h2>${events.part[i]}'s timeline : </h2>`
+      select += `<div><h2>${events.part[i]}'s timeline : ${table.title}</h2>`
       select += `
       <script type="text/javascript">
       var available="${table.available}";
@@ -40,14 +41,47 @@ router.get('/User/:page', function(request, response){
       var body = fs.readFileSync(`./html/table.html`, 'utf8')
       select += body
       select += `</div>`
+      for(ids in table.available)
+      {
+        now_id = table.available[ids]
+        if(group_ab[now_id]){
+          group_ab[now_id]++
+        }
+        else{
+          group_ab[now_id]=1
+        }
+      }
     }
     else{
-      select += `<div><h2>${events.part[i]}'s timeline : NOT SELECTED</h2></div>`
+      select += `<div><h2>${events.part[i]}'s timeline :<br> NOT SELECTED</h2></div>`
     }
     i = i + 1
   }
+  var group_available=JSON.stringify(group_ab);
+  /*for(ids in group_ab){
+    group_available += ids+','
+  }*/
+  select += `<div class="group"><div class="group_title"><h2>Group's timeline :</h2></div>`
+  select += `
+  <script type="text/javascript">
+  var group_available=${group_available};
+  </script>`
+  select += `<div class="group_table">`
+  body = fs.readFileSync('./html/event.html','utf8')
+  select += body
   select += `</div>`
-  var template = HTMLS.HTML_event(events.part,events.owner,events.title,page,select)
+  select += `
+  <div class="color" style="grid-template-columns: 65px repeat(${events.part.length+1}, auto) 90px;">
+    <div id="available">available</div>`
+  for(i=0;i<events.part.length+1;i++)
+  {
+    select+=`<div class="spectrum" id="sp${i}"></div>`
+  }
+  select+=  `<div id="not_available">not available</div>
+  </div>
+  </div>
+  </div>`
+  var template = HTMLS.HTML_event(events.part,events.owner,events.title,page,select,events.part.length)
   response.send(template)
 })
 
@@ -118,7 +152,6 @@ router.post('/update/:page',function(request, response){
   var tid = post.table
   var events = db.get('events').find({id:eid}).value()
   var i = 0
-  console.log(i < events.part.length)
   while(i < events.part.length){
     if(events.part[i] === request.user.id){
       events.table[i] = tid
