@@ -1,4 +1,4 @@
-/*create.js*/
+/*update.js*/
 var days = ["","Mon","Tue","Wed","Thu","Fri"];
 var times = ["9 AM","10 AM","11 AM","12 PM","1 PM","2 PM","3 PM","4 PM","5 PM","6 PM"];
 var day_len = 5;
@@ -76,9 +76,10 @@ $(function () {
 
   $('[type="submit"]')
   .click(function(){
-    var action = 'create_table';
+    var action = '../update_table';
     var params = {};
     var td = $('td');
+    params['id'] = pid;
     params['title'] = $('input[name="title"]').val();
     if(params['title'] === ""){
       alert('Please Input Title');

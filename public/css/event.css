@@ -1,3 +1,4 @@
+/*event.css*/
 .table_head th{
   font-size:16px;
   width:auto;
@@ -38,7 +39,7 @@ td{
   background-color:#7C85FF;
 }
 
-input[type="submit"]{
-  width: 100px;
-  height: 40px;
+.tables {
+  display: grid;
+  grid-template-columns: 300px 300px 300px 300px;
 }

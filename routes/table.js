@@ -12,9 +12,11 @@ router.get('/User/:page', function(request, response){
     return
   }
   var page = request.params.page
-  var body = db.get('tables').find({id:page}).value()
-  var template = HTMLS.HTML_table(body.available,body.user,body.title,page)
-  response.send(template)
+  var db_body = db.get('tables').find({id:page}).value()
+  fs.readFile(`./html/table.html`, 'utf8', function(err, body){
+    var template = HTMLS.HTML_table(body,db_body.user,db_body.title,page,db_body.available)
+    response.send(template)
+  })
 })
 
 router.get('/create', function(request, response){
@@ -24,8 +26,7 @@ router.get('/create', function(request, response){
   }
   var user_id = request.user.id
   fs.readFile(`./html/create.html`, 'utf8', function(err, body){
-    var template = HTMLS.HTML_create('create',body)
-    response.send(template)
+    response.send(body)
   })
 })
 
@@ -37,9 +38,15 @@ router.post('/create_table', function(request, response){
   var post = request.body
   var user_id = request.user.id
   var title = post.title
-  var available = post.available
+  var available = []
+  for(ids in post){
+    if(ids == 'title' || ids == 'id'){
+      continue;
+    }
+    available.push(ids)
+  }
   var id = shortid.generate()
-  console.log(post,user_id,id)
+  console.log(id,user_id,title)
   db.get('tables').push({
     id:id,
     user:user_id,
@@ -47,6 +54,7 @@ router.post('/create_table', function(request, response){
     available:available
   }).write()
   response.redirect(`/main`)
+
 })
 
 router.get('/update/:page',function(request,response){
@@ -75,9 +83,14 @@ router.post('/update_table',function(request,response){
     return
   }
   var post = request.body
-  var user_id = request.user.id
   var title = post.title
-  var available = post.available
+  var available = []
+  for(ids in post){
+    if(ids == 'title' || ids == 'id'){
+      continue;
+    }
+    available.push(ids)
+  }
   var id = post.id
   db.get('tables').find({id:id}).assign({
     title:title, available:available

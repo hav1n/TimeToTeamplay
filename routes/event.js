@@ -12,7 +12,7 @@ router.get('/User/:page', function(request, response){
     return
   }
   var page = request.params.page
-  var body = db.get('events').find({id:page}).value()
+  var events = db.get('events').find({id:page}).value()
   var table = db.get('tables').filter({user:request.user.id}).value()
   var select = `<form action="/event/update/${page}" method="post">
   <select name="table">
@@ -26,17 +26,28 @@ router.get('/User/:page', function(request, response){
   }
   select += `<input type="submit" value="변경" class="bar"></form>`
   i=0
-  while(i < body.part.length){
-    table = db.get('tables').find({id:body.table[i]}).value()
+  select += `<div class="tables">`
+  while(i < events.part.length){
+    table = db.get('tables').find({id:events.table[i]}).value()
     if(table){
-      select += `<p><h2>${body.part[i]}'s timeline : ${table.available}</h2></p>`
+      select += `<div><h2>${events.part[i]}'s timeline : </h2>`
+      select += `
+      <script type="text/javascript">
+      var available="${table.available}";
+      var ids=available.split(',');
+      </script>
+      `
+      var body = fs.readFileSync(`./html/table.html`, 'utf8')
+      select += body
+      select += `</div>`
     }
     else{
-      select += `<p><h2>${body.part[i]}'s timeline : NOT SELECTED</h2></p>`
+      select += `<div><h2>${events.part[i]}'s timeline : NOT SELECTED</h2></div>`
     }
     i = i + 1
   }
-  var template = HTMLS.HTML_event(body.part,body.owner,body.title,page,select)
+  select += `</div>`
+  var template = HTMLS.HTML_event(events.part,events.owner,events.title,page,select)
   response.send(template)
 })
 

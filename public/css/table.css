@@ -37,8 +37,3 @@ td{
 .highlighted{
   background-color:#7C85FF;
 }
-
-input[type="submit"]{
-  width: 100px;
-  height: 40px;
-}
