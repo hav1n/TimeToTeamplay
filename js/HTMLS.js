@@ -24,7 +24,7 @@ module.exports = {
     <html>
       <head>
         <meta charset="utf-8">
-        <link rel="stylesheet" href="/css/main.css">
+        <link rel="stylesheet" href="/css/table.css">
         <title>TTT - Time To Teamplay</title>
         <script type="text/javascript">
           var u_id="${id}";
@@ -118,8 +118,8 @@ module.exports = {
             var alpha = i/size;
             var rgbaCol = 'rgba(124,133,255,'+alpha+')';
             console.log(rgbaCol);
-  	        $(now_id).css("background-color",colors[i]);
-            $(table_class).css("background-color",colors[i]);
+  	        $(now_id).css("background-color",colors[Math.round(i*3/(size-1))]);
+            $(table_class).css("background-color",colors[Math.round(i*3/(size-1))]);
           }
         });
         </script>

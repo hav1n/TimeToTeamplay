@@ -1,3 +1,4 @@
+/*calendar.css*/
 body{
   margin:0;
 }
@@ -32,7 +33,7 @@ img{
 
 #main{
   /* border: 30px solid #C8BBB0; */
-  background-color: rgba(119, 126, 142, 0.5);
+  background-color: rgba(254, 178, 79, 0.5);
 }
 
 #m_home{
@@ -41,12 +42,12 @@ img{
 }
 
 #m_table{
-  background: rgba(119, 126, 142, 0.5);
+  background: #777E8E;
   border-radius: 30px 30px 0 0;
 }
 
 #m_calen{
-  background: #FEB24f;
+  background: rgba(254, 178, 79, 0.5);
   border-radius: 30px 30px 0 0;
 }
 
@@ -63,44 +64,4 @@ img{
 #m_logout{
   background: #B3DFEB;
   border-radius: 30px 30px 0 0;
-}
-
-.table_head th{
-  font-size:16px;
-  width:auto;
-  height:20px;
-  text-align:center;
-  vertical-align:middle;
-  border-bottom:0.5px solid #000000;
-}
-
-#th_0{
-  border-bottom-color:#FFFFFF;
-}
-
-.col_header{
-  font-size:10px;
-  width:30px;
-  text-align:right;
-  vertical-align:top;
-  border-right:0.5px solid #000000;
-}
-
-td{
-  width:45px;
-  height:9px;
-  background-color:#AAD2FA;
-  border-right:0.5px solid #000000;
-}
-
-.tr_1 td{
-  border-bottom:0.5px dashed #000000;
-}
-
-.tr_3 td{
-  border-bottom:0.5px solid #000000;
-}
-
-.highlighted{
-  background-color:#7C85FF;
 }

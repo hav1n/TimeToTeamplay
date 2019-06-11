@@ -2,8 +2,13 @@ body{
   margin: 0;
 }
 
+.main_grid{
+  display:grid;
+  grid-template-columns: 50vw 50vw;
+}
+
 .image_side{
-  background-color : #7C85FF;
+  background-color : #CAD0E9;
   width: 50vw;
   height: 100vh;
   float: left;
@@ -11,7 +16,6 @@ body{
 
 .logo{
   width:30%;
-  background-color: #7C85FF;
   top: 50%;
   left: 25%;
   position:absolute;
@@ -27,14 +31,17 @@ body{
 .login_side{
   float: right;
   width: 50vw;
+  background: url( "../images/register.jpg" ) no-repeat;
+  background-size: 50vw;
+  opacity:0.8;
 }
 
 .login_box{
   width: 320px;
   height: 420px;
-  background-color: #7C85FF;
+  background-color: #CAD0E9;
   color: #000000;
-  border: 1px solid #000000;
+  border: 1px solid #777E8E;
   border-radius: 10px;
   top:50%;
   left:75%;
@@ -57,6 +64,7 @@ body{
   margin: 0;
   padding: 0 0 15px;
   text-align: center;
+  color : #0A85A9;
   font-size: 28px;
 }
 .login_box p{
@@ -71,7 +79,7 @@ body{
 }
 
 .login_box input[type="text"], input[type="password"]{
-  border: 1px solid #FFFFFF;
+  border: 1px solid #777E8E;
   border-radius: 7px;
   height: 35px;
   outline: none;
@@ -80,16 +88,16 @@ body{
 }
 
 .login_box input[type="submit"]{
-  border:2px solid #4064C5;
+  border:1px solid #645D79;
   border-radius: 20px;
   outline: none;
   height: 40px;
-  background: #88DCDC;
+  background: #B3DFEB;
 }
 
 .login_box input[type="submit"]:hover{
   cursor: pointer;
-  background: #AAD2FA;
+  background: #645D79;
 }
 
 .login_box a{
@@ -100,10 +108,14 @@ body{
 }
 
 .login_box a:hover{
-  color: #FFFFFF;
+  color: #645D79;
 }
 
 #info, #account, #Remember{
   font-weight: normal;
   text-align: center;
+}
+
+::placeholder{
+  color : #645D79;
 }

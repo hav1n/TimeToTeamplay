@@ -6,6 +6,28 @@ var db = require('../js/db.js')
 var fs = require('fs')
 var shortid = require('shortid')
 
+router.get('/', function(request, response){
+  var user_id = request.user.id
+  var tablelist = db.get('tables').filter({ user:user_id }).value()
+  var eventlist = db.get('events').value()
+  var fmsg = request.flash()
+  fs.readFile(`html/main.html`, 'utf8', function(err, body){
+    body = body + HTMLS.tableList(tablelist)
+    body = body + HTMLS.eventList(eventlist, user_id)
+    body = body + `</div>
+      </div>
+      <div class="tails">
+      Gaenodab Co. | hav1n.allday@gmail.com | Copyright 2019
+      </div>`
+    if(fmsg.error)
+    {
+      body += `<script type="text/javascript">alert("${fmsg.error}");</script>`
+    }
+    var template = HTMLS.HTML_main(body,user_id)
+    response.send(template)
+  })
+})
+
 router.get('/User/:page', function(request, response){
   if(!LIB.authIsOwner(request, response)){
     response.redirect('/')
@@ -53,7 +75,7 @@ router.post('/create_table', function(request, response){
     title:title,
     available:available
   }).write()
-  response.redirect(`/main`)
+  response.redirect('/table')
 
 })
 
@@ -95,7 +117,7 @@ router.post('/update_table',function(request,response){
   db.get('tables').find({id:id}).assign({
     title:title, available:available
   }).write()
-  response.redirect(`/main`)
+  response.redirect(`/table`)
 })
 
 router.get('/delete/:page', function(request, response){
@@ -106,10 +128,10 @@ router.get('/delete/:page', function(request, response){
   var tables = db.get('tables').find({id:request.params.page}).value()
   if(tables.user !== request.user.id){
     request.flash('error', 'Not yours!')
-    return response.redirect('/')
+    return response.redirect('/table')
   }
   db.get('tables').remove({id:request.params.page}).write()
-  response.redirect('/')
+  response.redirect('/table')
 })
 
 module.exports = router

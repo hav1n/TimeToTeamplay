@@ -66,7 +66,7 @@ router.post('/login_process'
 
 router.get('/register',function(request,response){
   fs.readFile(`./html/register.html`, 'utf8', function(err, body){
-    var title = 'register'
+    var title = 'login'
     var template = HTMLS.HTML_base(title, body)
     var fmsg = request.flash()
     if(fmsg.error)
@@ -106,7 +106,7 @@ router.post('/register_process',function(request, response){
 
 router.get('/find',function(request, response){
   fs.readFile('./html/find.html','utf8',function(err,body){
-    var title = 'find'
+    var title = 'login'
     var template = HTMLS.HTML_base(title,body)
     var fmsg = request.flash()
     if(fmsg.error)

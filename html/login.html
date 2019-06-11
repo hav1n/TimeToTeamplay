@@ -1,23 +1,22 @@
 <div class="main_grid">
   <div class="image_side">
     <div class="logo">
-      <img src="/images/TTT_Logo.png" alt="TTT Logo" width="50%">
+      <!--img src="/images/TTT_Logo.png" alt="TTT Logo" width="50%"-->
     </div>
   </div>
   <div class="login_side">
     <div class="login_box">
       <img src="/images/24-hours.png" alt="login logo" width="100px" class="login_logo">
-      <h1>Login</h1>
+      <h1>Time To Teamplay</h1>
       <form action="/auth/login_process" method='post'>
-        <p>Username</p>
-        <input type="text" name="id" placeholder="Enter Username" class="bar" required>
-        <p>Password</p>
-        <input type="password" name="pw" placeholder="Enter Password" class="bar" required>
+        <p>아이디</p>
+        <input type="text" name="id" placeholder="아이디를 입력하세요." class="bar" required>
+        <p>비밀번호</p>
+        <input type="password" name="pw" placeholder="비밀번호를 입력하세요." class="bar" required>
         <p><input type="submit" name="" value="login" class="bar"></p>
-        <p id="Remember"><input type="checkbox" name="Remember me" value="">Remember me</p>
+        <p id="Remember"><input type="checkbox" name="Remember me" value="">로그인 유지</p>
       </form>
-      <p id="account"><a href="/auth/register">Make new account</a> | <a href="/auth/find">Lost your password?</a></p>
-      <p id="info"><a href="/about">About Us</a></p>
+      <p id="account"><br><a href="/auth/register">회원가입</a> | <a href="/auth/find">비밀번호 찾기</a></p>
     </div>
   </div>
 </div>

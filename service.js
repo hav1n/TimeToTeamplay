@@ -18,6 +18,8 @@ var flash = require('connect-flash')
 var tableRouter = require('./routes/table.js')
 var eventRouter = require('./routes/event.js')
 var authRouter = require('./routes/auth.js')
+var calendarRouter = require('./routes/calendar.js')
+var pageRouter = require('./routes/mypage.js')
 
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(compression())
@@ -53,6 +55,8 @@ app.use('/node_modules', express.static(path.join(__dirname,'/node_modules')))
 app.use('/table', tableRouter)
 app.use('/event', eventRouter)
 app.use('/auth', authRouter)
+app.use('/calendar', calendarRouter)
+app.use('/mypage', pageRouter)
 
 app.get('/', function(request, response){
   if(LIB.authIsOwner(request, response)){
@@ -85,19 +89,8 @@ app.get('/main', function(request, response){
     response.redirect('/')
     return
   }
-  var user_id = request.user.id
-  var tablelist = db.get('tables').filter({ user:user_id }).value()
-  var eventlist = db.get('events').value()
-  var fmsg = request.flash()
-  fs.readFile(`html/main.html`, 'utf8', function(err, body){
-    if(fmsg.error)
-    {
-      body += `<script type="text/javascript">alert("${fmsg.error}");</script>`
-    }
-    body = body + HTMLS.tableList(tablelist)
-    body = body + HTMLS.eventList(eventlist, user_id)
-    var template = HTMLS.HTML_main(body,user_id)
-    response.send(template)
+  fs.readFile(`./html/index.html`, 'utf8', function(err, body){
+    response.send(body)
   })
 })
 

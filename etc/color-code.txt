@@ -1,0 +1,12 @@
+@Airy Blue : #B3DFEB
+@Rosy Mauve : #C8BBB0 rgb(200, 187, 176)
+@Sea Green : #90A49C
+@Wood Yellow : #F2E1BC
+@Lime Green : #E2E48F
+@Natural Olive : #D2CFAC
+@Mystical Purple : #645D79
+@Fringe Orange : #F08A64
+@Hazy Blue : #777E8E
+@Bright Marigold : #FEB24f
+@Iluminated Violet : #CAD0E9
+@Primary Blue : #0A85A9
