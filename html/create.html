@@ -1,5 +1,41 @@
-<form action="/table/create_table" method="post">
-  <p><input type="text" name="title" id="user_title" placeholder="구분" class="bar"></p>
-  <p><textarea name="available" id="user_able" placeholder="가능여부" class="bar"></textarea></p>
-  <p><input type="submit" value="Upload" class="bar"><br></p>
-</form>
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="/css/create.css">
+    <title>TTT - Time To Teamplay</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="/javascript/create.js"></script>
+  </head>
+  <body>
+    <table cellpadding="0" cellspacing="0" id="time_table">
+      <caption>
+        <input type="text" name="title" placeholder="시간표 이름" class="bar" value="" required>
+      </caption>
+      <thead class="table_head">
+        <script type="text/javascript">
+          for(i=0;i<days.length;i++){
+            document.write(`<th id="th_${i}">${days[i]}</th>`);
+          }
+        </script>
+      </thead>
+      <tbody class="table_body">
+        <script type="text/javascript">
+          for(i=0;i<times.length;i++){
+            for(j=0;j<time_div;j++){
+              document.write(`<tr class="tr_${j}">`);
+              if(!j){
+                document.write(`<th rowspan="4" class="col_header">${times[i]}</th>`);
+              }
+              for(k=0;k<day_len;k++){
+                document.write(`<td id="td_${i}${j}${k}"></td>`);
+              }
+              document.write(`</tr>`);
+            }
+          }
+        </script>
+      </tbody>
+    </table>
+    <input type="submit" name="submit" value="입력" class="bar">
+  </body>
+</html>

@@ -1,7 +1,4 @@
 <table cellpadding="0" cellspacing="0" id="time_table">
-  <caption>
-    <input type="text" id="user_title" name="title" placeholder="시간표 이름" class="bar" required>
-  </caption>
   <thead class="table_head">
     <script type="text/javascript">
       for(i=0;i<days.length;i++){
@@ -19,10 +16,10 @@
           }
           for(k=0;k<day_len;k++){
             var tdid = `td_${i}${j}${k}`;
-            if(available.includes(tdid)){
-              document.write(`<td id=${tdid} class="highlighted"></td>`);
+            if(group_available[tdid]){
+              document.write(`<td id=${tdid} class="hl${group_available[tdid]}"></td>`);
             } else {
-              document.write(`<td id=${tdid}></td>`);
+              document.write(`<td id=${tdid} class="hl0"></td>`);
             }
           }
           document.write(`</tr>`);
@@ -31,4 +28,3 @@
     </script>
   </tbody>
 </table>
-<input type="submit" name="submit" value="수정" class="bar">

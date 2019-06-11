@@ -1,3 +1,4 @@
+/*event.css*/
 .table_head th{
   font-size:16px;
   width:auto;
@@ -9,6 +10,18 @@
 
 #th_0{
   border-bottom-color:#FFFFFF;
+}
+
+.group_table table{
+  background-color: #AAD2FA;
+}
+
+.group_table thead{
+  background-color: #FFFFFF;
+}
+
+.group_table th{
+  background-color: #FFFFFF;
 }
 
 .col_header{
@@ -38,7 +51,28 @@ td{
   background-color:#7C85FF;
 }
 
-input[type="submit"]{
-  width: 100px;
-  height: 40px;
+.tables {
+  display: grid;
+  grid-template-columns: 300px 300px 300px 300px;
+}
+
+.color{
+  margin-top: 10px;
+  display: grid;
+  grid-template-columns: 65px repeat(2, auto) 90px;
+  background-color: #AAD2FA;
+}
+
+#available{
+  text-align: left;
+  background-color: #FFFFFF;
+}
+
+#not_available{
+  text-align: right;
+  background-color: #FFFFFF;
+}
+
+.spectrum{
+  background-color: #7C85FF;
 }
