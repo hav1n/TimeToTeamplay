@@ -1,12 +1,12 @@
-@Airy Blue : #B3DFEB
+@Airy Blue : #B3DFEB rgb(179, 223, 235)
 @Rosy Mauve : #C8BBB0 rgb(200, 187, 176)
-@Sea Green : #90A49C
-@Wood Yellow : #F2E1BC
-@Lime Green : #E2E48F
-@Natural Olive : #D2CFAC
-@Mystical Purple : #645D79
-@Fringe Orange : #F08A64
-@Hazy Blue : #777E8E
-@Bright Marigold : #FEB24f
-@Iluminated Violet : #CAD0E9
-@Primary Blue : #0A85A9
+@Sea Green : #90A49C rgb(144, 164, 156)
+@Wood Yellow : #F2E1BC rgb(242, 225, 188)
+@Lime Green : #E2E48F rgb(226, 228, 143)
+@Natural Olive : #D2CFAC rgb(210, 207, 172)
+@Mystical Purple : #645D79 rgb(100, 93, 121)
+@Fringe Orange : #F08A64 rgb(240, 138, 100)
+@Hazy Blue : #777E8E rgb(119, 126, 142)
+@Bright Marigold : #FEB24F rgb(254, 178, 79)
+@Iluminated Violet : #CAD0E9 rgb(202, 208, 233)
+@Primary Blue : #0A85A9 rgb(10, 133, 169)
