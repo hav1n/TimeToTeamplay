@@ -11,13 +11,14 @@ router.get('/', function(request, response){
   var tablelist = db.get('tables').filter({ user:user_id }).value()
   var eventlist = db.get('events').value()
   var fmsg = request.flash()
-  fs.readFile(`html/main.html`, 'utf8', function(err, body){
+  fs.readFile(`html/timetable.html`, 'utf8', function(err, body){
     body = body + HTMLS.tableList(tablelist)
     body = body + HTMLS.eventList(eventlist, user_id)
     body = body + `</div>
       </div>
       <div class="tails">
-      Gaenodab Co. | hav1n.allday@gmail.com | Copyright 2019
+      Gaenodab Co. | <img src="/images/mail1.png" height="15px" width="15px" style="margin-top:5px;">
+      hav1n.allday@gmail.com | Copyright 2019
       </div>`
     if(fmsg.error)
     {

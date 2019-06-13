@@ -135,7 +135,7 @@ module.exports = {
           }
         </script>
         <p>
-          <a href="javascript:openPage('/event/delete')">delete</a>
+          <a href="javascript:openPage('/event/delete/${page}')">delete</a>
         </p>
       </body>
     </html>
