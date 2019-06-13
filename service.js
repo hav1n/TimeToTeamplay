@@ -20,6 +20,8 @@ var eventRouter = require('./routes/event.js')
 var authRouter = require('./routes/auth.js')
 var calendarRouter = require('./routes/calendar.js')
 var pageRouter = require('./routes/mypage.js')
+var aboutRouter = require('./routes/about.js')
+
 
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(compression())
@@ -57,6 +59,7 @@ app.use('/event', eventRouter)
 app.use('/auth', authRouter)
 app.use('/calendar', calendarRouter)
 app.use('/mypage', pageRouter)
+app.use('/about', aboutRouter)
 
 app.get('/', function(request, response){
   if(LIB.authIsOwner(request, response)){
@@ -74,7 +77,7 @@ app.get('/', function(request, response){
     response.send(template)
   })
 })
-
+/*
 app.get('/about', function(request, response){
   fs.readFile(`./html/about.html`, 'utf8', function(err, body){
     var title = 'about'
@@ -83,7 +86,7 @@ app.get('/about', function(request, response){
   })
   _url='/html/about.html'
 })
-
+*/
 app.get('/main', function(request, response){
   if(!LIB.authIsOwner(request, response)){
     response.redirect('/')
