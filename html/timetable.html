@@ -1,12 +1,59 @@
-<div class="menu_grid">
-  <div id="m_home" OnClick="location.href ='/main'" style="cursor:pointer;"><img src="/images/home.png"></div>
-  <div id="m_table" OnClick="location.href ='/table'" style="cursor:pointer;"><img src="/images/timetable.png"></div>
-  <div id="m_calen" OnClick="location.href ='/calendar'" style="cursor:pointer;"><img src="/images/calendar.png"></div>
-  <div id="m_about" OnClick="location.href ='/about'" style="cursor:pointer;"><img src="/images/about.png"></div>
-  <div id="m_page" OnClick="location.href ='/mypage'" style="cursor:pointer;"><img src="/images/user.png"></div>
-  <div id="m_logout" OnClick="location.href ='/auth/logout'" style="cursor:pointer;"><img src="/images/logout.png"></div>
-</div>
-<div class="main_grid">
-  <div id="main">
-    <p><a href="/table/create">create new timetable</a></p>
-    <p><a href="/event/make">make new event</a> | <a href="/event/join">join new event</a></p>
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <link rel="stylesheet" href="/css/table.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="/javascript/create.js"></script>
+  <title>TTT - Time To Teamplay</title>
+</head>
+<body>
+  <div class="menu_grid">
+    <div id="m_home" OnClick="location.href ='/main'" style="cursor:pointer;"><img src="/images/home.png"></div>
+    <div id="m_table" OnClick="location.href ='/table'" style="cursor:pointer;"><img src="/images/timetable.png"></div>
+    <div id="m_calen" OnClick="location.href ='/calendar'" style="cursor:pointer;"><img src="/images/calendar.png"></div>
+    <div id="m_about" OnClick="location.href ='/about'" style="cursor:pointer;"><img src="/images/about.png"></div>
+    <div id="m_page" OnClick="location.href ='/mypage'" style="cursor:pointer;"><img src="/images/user.png"></div>
+    <div id="m_logout" OnClick="location.href ='/auth/logout'" style="cursor:pointer;"><img src="/images/logout.png"></div>
+  </div>
+  <div class="main_grid">
+    <div class="tableside">
+      <div id="usertable">
+      <table cellpadding="0" cellspacing="0" id="time_table">
+        <thead class="table_head">
+          <script type="text/javascript">
+            for (i = 0; i < days.length; i++) {
+              document.write(`<th id="th_${i}">${days[i]}</th>`);
+            }
+          </script>
+        </thead>
+        <tbody class="table_body">
+          <script type="text/javascript">
+            for (i = 0; i < times.length; i++) {
+              for (j = 0; j < time_div; j++) {
+                document.write(`<tr class="tr_${j}">`);
+                if (!j) {
+                  document.write(`<th rowspan="4" class="col_header">${times[i]}</th>`);
+                }
+                for (k = 0; k < day_len; k++) {
+                  var tdid = `td_${i}${j}${k}`;
+                  document.write(`<td id=${tdid}></td>`);
+                }
+                document.write(`</tr>`);
+              }
+            }
+          </script>
+        </tbody>
+      </table>
+      </div>
+    </div>
+    <div class="eventside">
+
+    </div>
+  </div>
+  <div class="tails">
+    Gaenodab Co. | <img src="/images/mail1.png" height="15px" width="15px" style="margin-top:5px;">
+    hav1n.allday@gmail.com | Copyright 2019
+  </div>
+</body>
+</html>

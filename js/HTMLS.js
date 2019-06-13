@@ -161,7 +161,7 @@ module.exports = {
   },
 
   tableList:function(filelist){
-    var list = `<p><u>TABLES</u></p><ul>`
+    var list = `<ul>`
     var i = 0
     if(filelist!=undefined){
       while(i < filelist.length){
@@ -175,10 +175,9 @@ module.exports = {
   },
 
   eventList:function(filelist,u_id){
-    var list = `<p><u>EVENTS</u></p>`
+    var list = `<ul>`
     var i = 0
     if(filelist!=undefined){
-      list = list + '<ul>'
       while(i < filelist.length){
         if(filelist[i].part.includes(u_id)){
           list = list + `<li><a href="/event/User/${filelist[i].id}">${filelist[i].title}</a></li>`

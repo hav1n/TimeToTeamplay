@@ -12,20 +12,7 @@ router.get('/', function(request, response){
   var eventlist = db.get('events').value()
   var fmsg = request.flash()
   fs.readFile(`html/timetable.html`, 'utf8', function(err, body){
-    body = body + HTMLS.tableList(tablelist)
-    body = body + HTMLS.eventList(eventlist, user_id)
-    body = body + `</div>
-      </div>
-      <div class="tails">
-      Gaenodab Co. | <img src="/images/mail1.png" height="15px" width="15px" style="margin-top:5px;">
-      hav1n.allday@gmail.com | Copyright 2019
-      </div>`
-    if(fmsg.error)
-    {
-      body += `<script type="text/javascript">alert("${fmsg.error}");</script>`
-    }
-    var template = HTMLS.HTML_main(body,user_id)
-    response.send(template)
+    response.send(body)
   })
 })
 
