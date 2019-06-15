@@ -24,7 +24,7 @@ router.get('/', function(request, response){
       body+=`${send[i].receiver} << ${send[i].message} | ${send[i].timestamp}<br>`
     }
     body += `</div><div class="send_link"><br><button onclick="popup();">send new message</button></div>`
-    body +=`
+    body +=`<div><button onclick="chatpop();">Contact Admin</button></div>
     </div>
       </div>
       <div class="tails">
