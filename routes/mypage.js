@@ -5,6 +5,7 @@ var HTMLS = require('../js/HTMLS.js')
 var LIB = require('../js/lib.js')
 var db = require('../js/db.js')
 var shortid = require('shortid')
+var sanitizeHtml = require('sanitize-html')
 
 router.get('/', function(request, response){
   if(!LIB.authIsOwner(request, response)){
@@ -64,6 +65,7 @@ router.post('/dm_send',function(request, response){
   var post = request.body
   var recv = post.recv
   var msg = post.message
+  var sanitize_msg = sanitizeHtml(msg)
   var id = shortid.generate()
   var timestamp = Math.floor(+ new Date() / 1000)
   var receiver = db.get('users').find({id:recv}).value()
@@ -72,11 +74,16 @@ router.post('/dm_send',function(request, response){
     response.send('<script>alert("존재하지 않는 아이디입니다.");window.location="/mypage/dm";</script>')
     return
   }
+  if(!sanitize_msg)
+  {
+    response.send('<script>alert("메시지 내용이 존재하지 않습니다.");window.location="/mypage/dm";</script>')
+    return
+  }
   db.get('messages').push({
     id:id,
     sender:user_id,
     receiver:recv,
-    message:msg,
+    message:sanitize_msg,
     timestamp:String(timestamp)
   }).write()
   response.send('<script>window.opener.top.location.href="/mypage";window.close();</script>')

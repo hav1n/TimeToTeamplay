@@ -20,11 +20,13 @@ var eventRouter = require('./routes/event.js')
 var authRouter = require('./routes/auth.js')
 var calendarRouter = require('./routes/calendar.js')
 var pageRouter = require('./routes/mypage.js')
+var helmet = require('helmet')
 
+app.use(helmet())
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(compression())
 app.use(session({
-  secret: 'here to password for session',
+  secret: `'${process.env.SESSION_SECRET}'`,
   resave: false,
   saveUninitialized: true,
   store:new FileStore()
@@ -53,7 +55,7 @@ app.use(function (request, response, next) {
 app.use(express.static('public'))
 app.use('/node_modules', express.static(path.join(__dirname,'/node_modules')))
 app.use('/table', tableRouter)
-app.use('/event', eventRouter)
+//app.use('/event', eventRouter)
 app.use('/auth', authRouter)
 app.use('/calendar', calendarRouter)
 app.use('/mypage', pageRouter)
@@ -95,7 +97,7 @@ app.get('/main', function(request, response){
 })
 
 app.use(function(request, response, next) {
-  response.status(404).send('<h1>404 not found</h1>')
+  response.status(404).send('<title>TTT - Time To Teamplay</title><h1>404 not found</h1>')
 })
 
 if(args[2]!=undefined&&args[2]==='80')
