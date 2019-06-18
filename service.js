@@ -101,6 +101,11 @@ app.use(function(request, response, next) {
   response.status(404).send('<title>TTT - Time To Teamplay</title><h1>404 not found</h1>')
 })
 
+app.use(function (err, req, res, next) {
+  console.error(err.stack)
+  res.status(500).send('<title>TTT - Time To Teamplay</title><h1>500 Internal Server Error</h1><a href="/">go to home<a>')
+})
+
 if(args[2]!=undefined&&args[2]==='80')
 {
   app.listen(80, () => console.log('[+]App Listening on port 80'))

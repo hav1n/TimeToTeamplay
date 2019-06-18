@@ -7,6 +7,10 @@ var fs = require('fs')
 var shortid = require('shortid')
 
 router.get('/', function(request, response){
+  if(!LIB.authIsOwner(request, response)){
+    response.redirect('/')
+    return
+  }
   var user_id = request.user.id
   var tablelist = db.get('tables').filter({ user:user_id }).value()
   var eventlist = db.get('events').value()
