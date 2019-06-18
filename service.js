@@ -40,6 +40,8 @@ function addZero(data){
 return (data<10) ? "0"+data : data;
 }
 
+app.use(express.static('public'))
+
 app.use(function (request, response, next) {
   var timeInMs = Date.now()
   var date = new Date(timeInMs)
@@ -52,7 +54,6 @@ app.use(function (request, response, next) {
   next()
 })
 
-app.use(express.static('public'))
 app.use('/node_modules', express.static(path.join(__dirname,'/node_modules')))
 app.use('/table', tableRouter)
 //app.use('/event', eventRouter)
