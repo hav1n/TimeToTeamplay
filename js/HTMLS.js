@@ -17,23 +17,6 @@ module.exports = {
     </html>
     `
   },
-  HTML_about:function(title, body, developer){
-    
-    return `
-    <!doctype html>
-    <html>
-      <head>
-        <meta charset="utf-8">
-        <link rel="stylesheet" href="/css/${title}.css">
-        <title>TTT - Time To Teamplay</title>
-      </head>
-      <body>
-        ${body}
-      </body>
-    </html>
-    `
-  },
-
   //main page HTML
   HTML_main:function(body, id){
     return `
