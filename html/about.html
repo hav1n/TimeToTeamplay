@@ -6,11 +6,38 @@
   <div id="m_page" OnClick="location.href ='/mypage'" style="cursor:pointer;"><img src="/images/user.png"></div>
   <div id="m_logout" OnClick="location.href ='/auth/logout'" style="cursor:pointer;"><img src="/images/logout.png"></div>
 </div>
+
 <div class="main_grid">
   <div id="main">
-    <h1><a href="https://github.com/hav1n">hav1n</a> &
-    <a href="https://github.com/lomotos10">lomotos</a> & <a href="https://github.com/dkmv0623">DKMV</a> </h1>
-    <h1><a href="/">Go to homepage</a></h1>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script type="text/javascript">
+      $.ajaxSetup({
+        async: false
+      });
+      $.getJSON('/json/developer.json', function(data){
+          $.each(data, function(i, item){
+            developer_num = item.length
+            for(k=0;k<item.length;k++){
+                  document.write(`<div class="box" id = ${k} OnClick="expand_box(${k})">`)
+                  document.write(`<div><img class="profile_img" src="${item[k].profile_img}"></div>`)
+                  document.write(`<div><h1>${item[k].id}</h1></div>`)
+                  document.write(`<div><p>${item[k].description}</p></div>`)
+                  document.write(`<div><a href="${item[k].github}" style="text-decoration:none">github</a></div>`)
+                  document.write(`</div>`)
+            }
+          });
+      });
+      function expand_box(k){
+        var obj = document.getElementById(k);
+        obj.style.width = "50vw";
+        for(l=0;l<developer_num;l++){
+          if(l!=k){
+            var other = document.getElementById(l);
+            other.style.width = "auto";
+          }
+        }
+      }
+    </script>
   </div>
 </div>
 <div class="tails">

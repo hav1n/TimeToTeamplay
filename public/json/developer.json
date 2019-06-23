@@ -1,0 +1,28 @@
+{
+  "developers": [
+    {
+      "id": "hav1n",
+      "github": "https://github.com/hav1n",
+      "profile_img": "/images/hav1n.png",
+      "description": "Korea Univ. () 16"
+    },
+    {
+      "id": "lomotos",
+      "github": "https://github.com/lomotos10",
+      "profile_img": "/images/lomotos.png",
+      "description": "KAIST EE 16"
+    },
+    {
+      "id": "DKMV",
+      "github": "https://github.com/dkmv0623",
+      "profile_img": "/images/dkmv.jpg",
+      "description": "KAIST EE 16"
+    },
+    {
+      "id": "1yong",
+      "github": "https://www.facebook.com/profile.php?id=100003087641469",
+      "profile_img": "/images/1yong.png",
+      "description": "KAIST EE 16"
+    }
+  ]
+}
