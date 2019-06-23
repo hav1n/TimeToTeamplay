@@ -1,6 +1,6 @@
 /*create.js*/
 var days = ["","Mon","Tue","Wed","Thu","Fri"];
-var times = ["9 AM","10 AM","11 AM","12 PM","1 PM","2 PM","3 PM","4 PM","5 PM","6 PM"];
+var times = ["9AM","10AM","11AM","12PM","1PM","2PM","3PM","4PM","5PM","6PM"];
 var day_len = 5;
 var time_div = 4;
 

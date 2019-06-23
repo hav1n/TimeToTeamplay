@@ -1,6 +1,7 @@
 /*index.css*/
 body{
   margin:0;
+  font-family: 'Dosis', 'Nanum Gothic', sans-serif;
 }
 
 .menu_grid{
@@ -19,10 +20,18 @@ img{
   margin-top: 5%;
 }
 
+.mainimage{
+  height:auto;
+  margin:0;
+  opacity: 0.3;
+}
+
 .main_grid{
   display: grid;
   grid-template-columns: auto;
   grid-template-rows: calc(100vh - 85px - 20px);
+  overflow: hidden;
+  font-family: cursive;
 }
 
 .tails{
@@ -31,8 +40,22 @@ img{
   text-align: center;
 }
 
+#TTT{
+  position: absolute;
+  top: calc(50vh - 90px);
+  left: calc(50vw - 320px);
+  text-align: right;
+}
+
+#header{
+  font-size: 75px;
+}
+
+#main_body{
+  font-size: 30px;
+}
+
 #main{
-  /* border: 30px solid #C8BBB0; */
   background-color: rgba(200, 187, 176, 0.5);
 }
 
