@@ -21,12 +21,13 @@ var authRouter = require('./routes/auth.js')
 var calendarRouter = require('./routes/calendar.js')
 var pageRouter = require('./routes/mypage.js')
 var aboutRouter = require('./routes/about.js')
+var helmet = require('helmet')
 
-
+app.use(helmet())
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(compression())
 app.use(session({
-  secret: 'here to password for session',
+  secret: `'${process.env.SESSION_SECRET}'`,
   resave: false,
   saveUninitialized: true,
   store:new FileStore()
@@ -40,6 +41,8 @@ function addZero(data){
 return (data<10) ? "0"+data : data;
 }
 
+app.use(express.static('public'))
+
 app.use(function (request, response, next) {
   var timeInMs = Date.now()
   var date = new Date(timeInMs)
@@ -52,10 +55,9 @@ app.use(function (request, response, next) {
   next()
 })
 
-app.use(express.static('public'))
 app.use('/node_modules', express.static(path.join(__dirname,'/node_modules')))
 app.use('/table', tableRouter)
-app.use('/event', eventRouter)
+//app.use('/event', eventRouter)
 app.use('/auth', authRouter)
 app.use('/calendar', calendarRouter)
 app.use('/mypage', pageRouter)
@@ -89,7 +91,12 @@ app.get('/main', function(request, response){
 })
 
 app.use(function(request, response, next) {
-  response.status(404).send('<h1>404 not found</h1>')
+  response.status(404).send('<title>TTT - Time To Teamplay</title><h1>404 not found</h1>')
+})
+
+app.use(function (err, req, res, next) {
+  console.error(err.stack)
+  res.status(500).send('<title>TTT - Time To Teamplay</title><h1>500 Internal Server Error</h1><a href="/">go to home<a>')
 })
 
 if(args[2]!=undefined&&args[2]==='80')

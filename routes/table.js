@@ -7,24 +7,16 @@ var fs = require('fs')
 var shortid = require('shortid')
 
 router.get('/', function(request, response){
+  if(!LIB.authIsOwner(request, response)){
+    response.redirect('/')
+    return
+  }
   var user_id = request.user.id
   var tablelist = db.get('tables').filter({ user:user_id }).value()
   var eventlist = db.get('events').value()
   var fmsg = request.flash()
-  fs.readFile(`html/main.html`, 'utf8', function(err, body){
-    body = body + HTMLS.tableList(tablelist)
-    body = body + HTMLS.eventList(eventlist, user_id)
-    body = body + `</div>
-      </div>
-      <div class="tails">
-      Gaenodab Co. | hav1n.allday@gmail.com | Copyright 2019
-      </div>`
-    if(fmsg.error)
-    {
-      body += `<script type="text/javascript">alert("${fmsg.error}");</script>`
-    }
-    var template = HTMLS.HTML_main(body,user_id)
-    response.send(template)
+  fs.readFile(`html/timetable.html`, 'utf8', function(err, body){
+    response.send(body)
   })
 })
 
