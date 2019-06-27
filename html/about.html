@@ -9,34 +9,68 @@
 
 <div class="main_grid">
   <div id="main">
+    <div class="box" id="leftbox">
+      <div class="title"><h1>Time To Teamplay</h1></div>
+      <div class="paragraph"><p>Time To Teamplay is time management web application, specialized in sharing your timetable and managing your time with your friends, family, and teammates!</p></div>
+      <div class="title"><h1>How To Use</h1></div>
+      <div class="paragraph"><p>Make your timetable in timetable tab, and make event in event tab. Then invite your friends to your event by sending the invite code. TimeToTeamplay makes group's timetable and you can find best time for your event! </p></div>
+    </div>
+
+    <div class="box">
+      <div class="title"><h1>Developers</h1></div>
+      <div id='slideButtons'>
+        <button id="prev" type='button'><</button>
+      </div>
+      <div id='slides'>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script type="text/javascript">
       $.ajaxSetup({
         async: false
       });
       $.getJSON('/json/developer.json', function(data){
-          $.each(data, function(i, item){
-            developer_num = item.length
-            for(k=0;k<item.length;k++){
-                  document.write(`<div class="box" id = ${k} OnClick="expand_box(${k})">`)
-                  document.write(`<div><img class="profile_img" src="${item[k].profile_img}"></div>`)
-                  document.write(`<div><h1>${item[k].id}</h1></div>`)
-                  document.write(`<div><p>${item[k].description}</p></div>`)
-                  document.write(`<div><a href="${item[k].github}" style="text-decoration:none">github</a></div>`)
-                  document.write(`</div>`)
-            }
-          });
-      });
-      function expand_box(k){
-        var obj = document.getElementById(k);
-        obj.style.width = "50vw";
-        for(l=0;l<developer_num;l++){
-          if(l!=k){
-            var other = document.getElementById(l);
-            other.style.width = "auto";
+        $.each(data, function(i, item){
+          developer_num = item.length
+          for(k=0;k<item.length;k++){
+            document.write(`<div id='slider'>`)
+            document.write(`<div id = 'innerbox'>`)
+            document.write(`<div><img class="profile_img" src="${item[k].profile_img}"></div>`)
+            document.write(`<div><h1>${item[k].id}</h1></div>`)
+            document.write(`<div><p>${item[k].description}</p></div>`)
+            document.write(`<div><a target="_blank" href="${item[k].github}" style="text-decoration:none"><img src="images/github_icon.png"></a></div>`)
+            document.write(`</div>`)
+            document.write(`</div>`)
           }
+        })
+      })
+      document.write(`</div>`)
+      document.write(`<div id='slideButtons'>`)
+      document.write(`<button id="next" type='button'>></button>`)
+      document.write(`</div>`)
+      document.write(`</div>`)
+      slideW = $('#slides').width();
+      current = 0;
+      $(document).on('click', '#prev', function(e) {
+        if (current > 0 && current <= developer_num - 1) {
+          current--;
         }
-      }
+        console.log(current);
+        e.preventDefault();
+        $('#slides').animate({
+          scrollLeft: slideW * current
+        }, 600);
+      });
+
+      $(document).on('click', '#next', function(e) {
+        if (current < developer_num - 1){
+          current++;
+        }
+        console.log(current);
+        e.preventDefault();
+        $('#slides').animate({
+          scrollLeft: slideW * current
+        }, 600);
+
+      });
     </script>
   </div>
 </div>
