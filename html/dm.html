@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>TTT - Time To Teamplay</title>
+    <link rel="stylesheet" href="/jquery/jquery-ui.css">
+    <script src="/jquery/jquery-1.12.4.js"></script>
+    <script src="/jquery/jquery-ui.js"></script>
+    <script type="text/javascript">
+      $(function() {
+        var users = [];
+        $("#user_title").autocomplete({source: users});
+      });
+    </script>
+  </head>
+  <body>
+    <form action="/mypage/dm_send" method="post">
+      <p><input type="text" name="recv" id="user_title" placeholder="받는 사람" class="bar" required></p>
+      <p><input type="textarea" name="message" id="user_msg" placeholder="내용" required></p>
+      <p><input type="submit" value="전송" class="bar"><br></p>
+    </form>
+  </body>
+</html>

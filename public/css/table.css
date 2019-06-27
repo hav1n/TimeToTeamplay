@@ -1,5 +1,6 @@
 body{
   margin:0;
+  font-family: 'Dosis', 'Nanum Gothic', sans-serif;
 }
 
 .menu_grid{
@@ -20,8 +21,32 @@ img{
 
 .main_grid{
   display: grid;
-  grid-template-columns: auto;
+  grid-template-columns: 50vw 50vw;
   grid-template-rows: calc(100vh - 85px - 20px);
+  background: rgba(119, 126, 142, 0.5);
+}
+
+.tableside{
+  position: relative;
+  background: rgb(179, 223, 235);
+  margin: 30px 20px 30px 30px;
+  text-align: center;
+  vertical-align: middle;
+}
+
+#usertable{
+  background-color: rgba(242, 225, 188, 0.8);
+  display:inline-block;
+  position: absolute;
+  top:50%;
+  left:50%;
+  padding: 5vw;
+  transform: translate(-50%,-50%);
+}
+
+.eventside{
+  background: rgb(179, 223, 235);
+  margin: 30px 30px 30px 20px;
 }
 
 .tails{
@@ -31,7 +56,6 @@ img{
 }
 
 #main{
-  /* border: 30px solid #C8BBB0; */
   background-color: rgba(119, 126, 142, 0.5);
 }
 
@@ -75,12 +99,12 @@ img{
 }
 
 #th_0{
-  border-bottom-color:#FFFFFF;
+  border-bottom-color:rgba(242, 225, 188, 0.8);
 }
 
 .col_header{
   font-size:10px;
-  width:30px;
+  width:auto;
   text-align:right;
   vertical-align:top;
   border-right:0.5px solid #000000;
@@ -103,4 +127,9 @@ td{
 
 .highlighted{
   background-color:#7C85FF;
+}
+
+input[type="submit"]{
+  width: 100px;
+  height: 40px;
 }

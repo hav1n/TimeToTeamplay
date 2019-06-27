@@ -1,5 +1,6 @@
 body{
   margin: 0;
+  font-family: 'Dosis', 'Nanum Gothic', sans-serif;
 }
 
 .main_grid{
@@ -12,6 +13,7 @@ body{
   width: 50vw;
   height: 100vh;
   float: left;
+  text-align: center;
 }
 
 .logo{
@@ -66,11 +68,13 @@ body{
   text-align: center;
   color : #0A85A9;
   font-size: 28px;
+  font-weight:300;
 }
 .login_box p{
   margin: 0;
   padding: 0;
   font-weight: bold;
+  font-size: 14px;
 }
 
  .bar{
@@ -84,7 +88,7 @@ body{
   height: 35px;
   outline: none;
   background: transparent;
-  font-size: 16px
+  font-size: 13px;
 }
 
 .login_box input[type="submit"]{
@@ -93,6 +97,7 @@ body{
   outline: none;
   height: 40px;
   background: #B3DFEB;
+  font-size:16px;
 }
 
 .login_box input[type="submit"]:hover{
