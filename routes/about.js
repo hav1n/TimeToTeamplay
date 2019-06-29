@@ -6,7 +6,7 @@ var fs = require('fs')
 router.get('/', function(request, response){
   fs.readFile(`html/about.html`, 'utf8', function(err, body){
     if(err){
-      console.log('err1')
+      console.log('about.html error')
     }
     else{
       var title = 'about'
