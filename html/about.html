@@ -10,66 +10,82 @@
 <div class="main_grid">
   <div id="main">
     <div class="box" id="leftbox">
-      <div class="title"><h1>Time To Teamplay</h1></div>
-      <div class="paragraph"><p>Time To Teamplay is time management web application, specialized in sharing your timetable and managing your time with your friends, family, and teammates!</p></div>
-      <div class="title"><h1>How To Use</h1></div>
-      <div class="paragraph"><p>Make your timetable in timetable tab, and make event in event tab. Then invite your friends to your event by sending the invite code. TimeToTeamplay makes group's timetable and you can find best time for your event! </p></div>
+      <div class="title"><h1><span style="font-family:cursive;">Time To Teamplay</span> 에 대하여<br></h1></div>
+      <div class="paragraph"><br>&nbspTime To Teamplay는 시간관리 웹 어플리케이션입니다.<br>&nbsp당신의 시간표를 공유하고, 당신의 친구들, 동료과 같이 시간을 관리해보세요!</div>
+      <div class="title"><h1><span style="font-family:cursive;">Time To Teamplay</span> 를 이용하는 방법<br></h1></div>
+      <div class="paragraph"><br>&nbsp1. 시간표 탭에서 시간표를 만들고, 새로운 이벤트를 생성하세요.<br>&nbsp2. 초대 코드를 보내 친구들을 초대하세요.<br>&nbsp3. TTT는 참여자들의 시간표를 이용해 만날수 있는 최적의 시간을 찾아줍니다!</div>
     </div>
 
     <div class="box">
       <div class="title"><h1>Developers</h1></div>
       <div id='slideButtons'>
-        <button id="prev" type='button'><</button>
+        <button id="prev" type='button' hidden><</button>
       </div>
       <div id='slides'>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="/jquery/jquery.min.js"></script>
     <script type="text/javascript">
       $.ajaxSetup({
         async: false
       });
       $.getJSON('/json/developer.json', function(data){
         $.each(data, function(i, item){
-          developer_num = item.length
+          developer_num = item.length;
           for(k=0;k<item.length;k++){
-            document.write(`<div id='slider'>`)
-            document.write(`<div id = 'innerbox'>`)
-            document.write(`<div><img class="profile_img" src="${item[k].profile_img}"></div>`)
-            document.write(`<div><h1>${item[k].id}</h1></div>`)
-            document.write(`<div><p>${item[k].description}</p></div>`)
-            document.write(`<div><a target="_blank" href="${item[k].github}" style="text-decoration:none"><img src="images/github_icon.png"></a></div>`)
-            document.write(`</div>`)
-            document.write(`</div>`)
+            document.write(`<div id='slider'>`);
+            document.write(`<div id = 'innerbox'>`);
+            document.write(`<div><img class="profile_img" src="${item[k].profile_img}"></div>`);
+            document.write(`<div><h1>${item[k].id}</h1></div>`);
+            document.write(`<div><p>${item[k].description}</p></div>`);
+            document.write(`<div><a target="_blank" href="${item[k].github}" style="text-decoration:none"><img src="/images/github_icon.png"></a></div>`);
+            document.write(`</div>`);
+            document.write(`</div>`);
           }
-        })
-      })
-      document.write(`</div>`)
-      document.write(`<div id='slideButtons'>`)
-      document.write(`<button id="next" type='button'>></button>`)
-      document.write(`</div>`)
-      document.write(`</div>`)
-      slideW = $('#slides').width();
+        });
+      });
+      document.write(`</div>`);
+      document.write(`<div id='slideButtons'>`);
+      document.write(`<button id="next" type="button">></button>`);
+      document.write(`</div>`);
+      document.write(`</div>`);
       current = 0;
+      slideW = $('#slides').width();
       $(document).on('click', '#prev', function(e) {
         if (current > 0 && current <= developer_num - 1) {
           current--;
         }
-        console.log(current);
         e.preventDefault();
         $('#slides').animate({
           scrollLeft: slideW * current
-        }, 600);
+        }, 300);
+        if (current == 0){
+          $('#prev').hide();
+        } else {
+          $('#prev').show();
+        }
+        if (current == developer_num-1){
+          $('#next').hide();
+        } else {
+          $('#next').show();
+        }
       });
-
       $(document).on('click', '#next', function(e) {
         if (current < developer_num - 1){
           current++;
         }
-        console.log(current);
         e.preventDefault();
         $('#slides').animate({
           scrollLeft: slideW * current
-        }, 600);
-
+        }, 300);
+        if (current == 0){
+          $('#prev').hide();
+        } else {
+          $('#prev').show();
+        }
+        if (current == developer_num-1){
+          $('#next').hide();
+        } else {
+          $('#next').show();
+        }
       });
     </script>
   </div>

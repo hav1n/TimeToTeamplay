@@ -98,10 +98,15 @@ img{
   border: 0;
   background-color: transparent;
   font-size: 5vw;
+  color : #F2E1BC;
 }
 
 #prev:focus{
   outline: 0;
+}
+
+#prev:hover{
+  color:#E2E48F;
 }
 
 #next{
@@ -110,10 +115,15 @@ img{
   border: 0;
   background-color: transparent;
   font-size: 5vw;
+  color : #F2E1BC;
 }
 
 #next:focus{
   outline: 0;
+}
+
+#next:hover{
+  color : #E2E48F;
 }
 
 .box{
@@ -140,6 +150,7 @@ img{
   display: grid;
   grid-template-rows: 8vh 1fr 8vh 1fr;
   grid-template-columns: 1fr;
+  padding:3vw; 
 }
 
 .title{
