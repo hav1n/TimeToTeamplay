@@ -98,6 +98,10 @@ router.get('/make', function(request, response){
 })
 
 router.post('/make_event',function(request, response){
+  if(!LIB.authIsOwner(request, response)){
+    response.redirect('/')
+    return
+  }
   var post = request.body
   var owner = request.user.id
   var title = post.title
@@ -127,6 +131,10 @@ router.get('/join',function(request, response){
 })
 
 router.post('/join_event',function(request, response){
+  if(!LIB.authIsOwner(request, response)){
+    response.redirect('/')
+    return
+  }
   var post = request.body
   var id = post.id
   var events = db.get('events').find({id:id}).value()
@@ -147,6 +155,10 @@ router.post('/join_event',function(request, response){
 })
 
 router.post('/update/:page',function(request, response){
+  if(!LIB.authIsOwner(request, response)){
+    response.redirect('/')
+    return
+  }
   var eid = request.params.page
   var post = request.body
   var tid = post.table
