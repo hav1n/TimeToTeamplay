@@ -4,11 +4,31 @@ body{
   font-family: 'Dosis', 'Nanum Gothic', sans-serif;
 }
 
-.menu_grid{
+.body_grid{
   display: grid;
-  grid-template-columns: repeat(6,16vw);
-  grid-template-rows: 75px;
+  grid-template-columns: auto;
+}
+
+.menu_grid{
   text-align: center;
+}
+
+.menu_grid_left{
+  display: grid;
+  float: left;
+  grid-template-columns: repeat(5,10vw);
+  grid-template-rows: 50px;
+  grid-gap: 10px;
+  margin-top:10px;
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+.menu_grid_right{
+  display: grid;
+  float: right;
+  grid-template-columns: repeat(1,10vw);
+  grid-template-rows: 50px;
   grid-gap: 10px;
   margin-top:10px;
   margin-left: 10px;
