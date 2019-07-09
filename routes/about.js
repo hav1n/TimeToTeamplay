@@ -1,9 +1,14 @@
 var express = require('express')
 var router = express.Router()
 var HTMLS = require('../js/HTMLS.js')
+var LIB = require('../js/lib.js')
 var fs = require('fs')
 
 router.get('/', function(request, response){
+  if(!LIB.authIsOwner(request, response)){
+    response.redirect('/')
+    return
+  }
   fs.readFile(`html/about.html`, 'utf8', function(err, body){
     if(err){
       console.log('about.html error')

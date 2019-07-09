@@ -6,6 +6,7 @@ var LIB = require('../js/lib.js')
 var db = require('../js/db.js')
 var shortid = require('shortid')
 var sanitizeHtml = require('sanitize-html')
+
 function makeTimeString(timestamp) {
   let now =+ new Date()
   now = now / 1000
@@ -19,6 +20,7 @@ function makeTimeString(timestamp) {
     return date.getFullYear() + '년 ' + (date.getMonth() + 1) + '월 ' + date.getDate() + '일'
   }
 }
+
 router.get('/', function(request, response){
   if(!LIB.authIsOwner(request, response)){
     response.redirect('/')
