@@ -89,8 +89,7 @@ router.get('/', function(request, response){
     //   body+=`${send[i].receiver} << ${send[i].message} | ${send[i].timestamp}<br>`
     // }
      body += `</div><div class="send_link"><br><button onclick="popup();">send new message</button></div>`
-     body +=`<div><button onclick="chatpop();">Contact Admin</button></div>
-     </div>
+     body +=`</div>
        </div>
        <div class="tails">
          Gaenodab Co. | <img src="/images/mail1.png" height="15px" width="15px" style="margin-top:5px;">
