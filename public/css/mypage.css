@@ -31,7 +31,62 @@ img{
   color: #645D79;
   text-align: center;
 }
-
+.name{
+  background: #FFFFFF;
+  margin-left: 10px;
+  width: 400px;
+  padding-top: 5px;
+	padding-right: 10px;
+	padding-bottom: 20px;
+	padding-left: 10px;
+  border-radius: 10px 10px 10px 10px;
+}
+.chatroom {
+border-radius: 10px 10px 10px 10px;
+padding-left: 10px;
+padding-right: 10px;
+  background-color: white;
+  margin: 2px;
+  border: none;
+  color: black;
+  text-align: left;
+  text-decoration: none;
+  font-size: 16px;
+  display: inline-block;
+  width: 400px;
+  cursor: pointer;
+  -webkit-transition-duration: 0.4s;
+  transition-duration: 0.4s;
+  position: relative;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.chatroom:hover {
+	background-color: rgba(10, 133, 169, 0.5);
+}
+.desc{
+  background-color: none;
+  margin: 2px;
+  border: none;
+  color: black;
+  text-align: left;
+  text-decoration: none;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-size: 16px;
+  display: inline-block;
+  width: 300px;
+}
+.time{
+  color: #645D79;
+  float: right;
+  text-align: right;
+  width: 50px;
+  position: absolute;
+  right: 0;
+}
 #main{
   /* border: 30px solid #C8BBB0; */
   background-color: rgba(10, 133, 169, 0.5);
