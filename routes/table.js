@@ -13,11 +13,26 @@ router.get('/', function(request, response){
   }
   var user_id = request.user.id
   var tablelist = db.get('tables').filter({ user:user_id }).value()
-  var eventlist = db.get('events').value()
   var fmsg = request.flash()
-  fs.readFile(`html/timetable.html`, 'utf8', function(err, body){
-    response.send(body)
+  fs.readFile(`html/table.html`, 'utf8', function(err, body){
+    if(fmsg.error)
+    {
+      body += `<script type="text/javascript">alert("${fmsg.error}");</script>`
+    }
+    body = body + HTMLS.tableList(tablelist)
+    var template = HTMLS.HTML_main(body)
+    response.send(template)
   })
+/*
+  if(tablelist&&tablelist.legnth){
+    fs.readFile(`html/timetable.html`, 'utf8', function(err, body){
+      response.send(body)
+    })
+  }
+  else{
+    response.send('create table first')
+  }
+*/
 })
 
 router.get('/User/:page', function(request, response){

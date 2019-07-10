@@ -57,7 +57,7 @@ app.use(function (request, response, next) {
 
 app.use('/node_modules', express.static(path.join(__dirname,'/node_modules')))
 app.use('/table', tableRouter)
-//app.use('/event', eventRouter)
+app.use('/event', eventRouter)
 app.use('/auth', authRouter)
 app.use('/calendar', calendarRouter)
 app.use('/mypage', pageRouter)

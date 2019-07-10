@@ -115,7 +115,7 @@ router.post('/make_event',function(request, response){
     part:part,
     table:table
   }).write()
-  response.redirect(`/main`)
+  response.redirect(`/table`)
 })
 
 router.get('/join',function(request, response){
@@ -151,7 +151,7 @@ router.post('/join_event',function(request, response){
   db.get('events').find({id:id}).assign({
     part:events.part,table:events.table
   }).write()
-  response.redirect(`/main`)
+  response.redirect(`/table`)
 })
 
 router.post('/update/:page',function(request, response){
@@ -188,7 +188,7 @@ router.get('/delete/:page',function(request,response){
     return response.redirect('/')
   }
   db.get('events').remove({id:request.params.page}).write()
-  response.redirect('/')
+  response.redirect('/table')
 })
 
 module.exports = router

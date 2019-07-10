@@ -18,21 +18,39 @@ module.exports = {
     `
   },
   //main page HTML
-  HTML_main:function(body, id){
+  HTML_main:function(body){
     return `
     <!doctype html>
     <html>
-      <head>
-        <meta charset="utf-8">
-        <link rel="stylesheet" href="/css/table.css">
-        <title>TTT - Time To Teamplay</title>
-        <script type="text/javascript">
-          var u_id="${id}";
-        </script>
-      </head>
-      <body>
-        ${body}
-      </body>
+    <head>
+      <meta charset="utf-8">
+      <link rel="stylesheet" href="/css/table.css">
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+      <script src="/javascript/create.js"></script>
+      <title>TTT - Time To Teamplay</title>
+    </head>
+    <body>
+      <div class="menu_grid">
+        <div id="m_home" OnClick="location.href ='/main'" style="cursor:pointer;"><img src="/images/home.png"></div>
+        <div id="m_table" OnClick="location.href ='/table'" style="cursor:pointer;"><img src="/images/timetable.png"></div>
+        <div id="m_calen" OnClick="location.href ='/calendar'" style="cursor:pointer;"><img src="/images/calendar.png"></div>
+        <div id="m_about" OnClick="location.href ='/about'" style="cursor:pointer;"><img src="/images/about.png"></div>
+        <div id="m_page" OnClick="location.href ='/mypage'" style="cursor:pointer;"><img src="/images/user.png"></div>
+        <div id="m_logout" OnClick="location.href ='/auth/logout'" style="cursor:pointer;"><img src="/images/logout.png"></div>
+      </div>
+      <div class="main_grid">
+        <div class="tableside">
+          ${body}
+        </div>
+        <div class="eventside">
+
+        </div>
+      </div>
+      <div class="tails">
+        Gaenodab Co. | <img src="/images/mail1.png" height="15px" width="15px" style="margin-top:5px;">
+        hav1n.allday@gmail.com | Copyright 2019
+      </div>
+    </body>
     </html>
     `
   },
