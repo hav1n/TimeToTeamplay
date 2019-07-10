@@ -41,10 +41,10 @@ img{
 	padding-left: 10px;
   border-radius: 10px 10px 10px 10px;
 }
-.chatroom {
-border-radius: 10px 10px 10px 10px;
-padding-left: 10px;
-padding-right: 10px;
+.chatlist{
+  border-radius: 10px 10px 10px 10px;
+  padding-left: 10px;
+  padding-right: 10px;
   background-color: white;
   margin: 2px;
   border: none;
@@ -62,8 +62,25 @@ padding-right: 10px;
   overflow: hidden;
   text-overflow: ellipsis;
 }
-.chatroom:hover {
+.chatlist:hover {
 	background-color: rgba(10, 133, 169, 0.5);
+}
+.chatroom {
+  border-radius: 10px 10px 10px 10px;
+  padding-left: 10px;
+  padding-right: 10px;
+  background-color: white;
+  margin: 2px;
+  border: none;
+  color: black;
+  text-align: left;
+  text-decoration: none;
+  font-size: 16px;
+  display: inline-block;
+  width: 400px;
+  cursor: pointer;
+  position: absolute;
+  float: right;
 }
 .desc{
   background-color: none;
@@ -77,15 +94,16 @@ padding-right: 10px;
   text-overflow: ellipsis;
   font-size: 16px;
   display: inline-block;
-  width: 300px;
+  width: 250px;
 }
 .time{
   color: #645D79;
   float: right;
   text-align: right;
-  width: 50px;
+  width: 100px;
   position: absolute;
   right: 0;
+  font-size: 12px;
 }
 #main{
   /* border: 30px solid #C8BBB0; */

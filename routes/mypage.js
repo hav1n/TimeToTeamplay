@@ -15,8 +15,8 @@ function makeTimeString(timestamp) {
   } else if (diff < 60 * 60 * 24) {
     return (parseInt(diff / 60 / 60)).toString() + '시간 전'
   } else {
-    let date = new Date(timestamp)
-    return date.getFullYear() + '년 ' + (date.getMonth() + 1) + '월 ' + date.getDate() + '일'
+    let date = new Date(timestamp * 1000)
+    return date.getFullYear() + '년 \n' + (date.getMonth() + 1) + '월 ' + date.getDate() + '일'
   }
 }
 router.get('/', function(request, response){
@@ -73,9 +73,10 @@ router.get('/', function(request, response){
     for(i=0;i<name_list.length;i++){
       name = name_list[i]
       last_m = message_by_name[name][message_by_name[name].length - 1]
+      console.log(last_m)
       date = makeTimeString(last_m.timestamp)
-      body += `<button class="chatroom">
-                    <p class="desc">${name}<br>${last_m.message}
+      body += `<button value="${name}" class="chatlist">
+                    <p class="desc">${name}<br>${sanitizeHtml(last_m.message)}
                       <span class="time">| ${date}
                       </span>
                       </p>
@@ -131,6 +132,7 @@ router.post('/dm_send',function(request, response){
   var id = shortid.generate()
   var timestamp = Math.floor(+ new Date() / 1000)
   var receiver = db.get('users').find({id:recv}).value()
+  var noSpace = /^[^-\s][a-zA-Z0-9_\s-]+$/
   if(!receiver)
   {
     response.send('<script>alert("존재하지 않는 아이디입니다.");window.location="/mypage/dm";</script>')
@@ -139,6 +141,10 @@ router.post('/dm_send',function(request, response){
   if(!sanitize_msg)
   {
     response.send('<script>alert("메시지 내용이 존재하지 않습니다.");window.location="/mypage/dm";</script>')
+    return
+  }
+  if(!noSpace.test(msg)) {
+    response.send('<script>alert("공백으로 메시지를 시작할 수 없습니다.");window.location="/mypage/dm";</script>')
     return
   }
   if (user_id === recv) {
