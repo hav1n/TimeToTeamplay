@@ -1,35 +1,237 @@
-<!DOCTYPE html>
-<html>
+<!doctype html>
+<html lang="en">
+
 <head>
   <meta charset="utf-8">
-  <title>TTT - Time To Teamplay</title>
-  <link rel="stylesheet" href="/css/index.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <title>H1LD &mdash; Heal The World</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link href="assets/css/bootstrap.css" rel="stylesheet" />
+  <link href="assets/css/bootstrap-responsive.css" rel="stylesheet" />
+  <link href="assets/css/prettyPhoto.css" rel="stylesheet" />
+  <link href="assets/css/animate.css" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css?family=Noto+Serif:400,700,400italic|Roboto+Condensed:400,300,700" rel="stylesheet" />
+
+  <link href="assets/css/style.css" rel="stylesheet" />
+  <link href="assets/color/default.css" rel="stylesheet" />
+
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="ico/apple-touch-icon-144-precomposed.png" />
+  <link rel="apple-touch-icon-precomposed" sizes="114x114" href="ico/apple-touch-icon-114-precomposed.png" />
+  <link rel="apple-touch-icon-precomposed" sizes="72x72" href="ico/apple-touch-icon-72-precomposed.png" />
+  <link rel="apple-touch-icon-precomposed" href="ico/apple-touch-icon-57-precomposed.png" />
+  <link rel="shortcut icon" href="assets/favicon.ico" />
+
 </head>
+
 <body>
-  <div class="body_grid">
-    <div class="menu_grid">
-      <div class="menu_grid_left">
-        <div id="m_home" OnClick="location.href ='/main'" style="cursor:pointer;"><img src="/images/home.png"></div>
-        <div id="m_table" OnClick="location.href ='/table'" style="cursor:pointer;"><img src="/images/timetable.png"></div>
-        <div id="m_calen" OnClick="location.href ='/calendar'" style="cursor:pointer;"><img src="/images/calendar.png"></div>
-        <div id="m_about" OnClick="location.href ='/about'" style="cursor:pointer;"><img src="/images/about.png"></div>
-        <div id="m_page" OnClick="location.href ='/mypage'" style="cursor:pointer;"><img src="/images/user.png"></div>
-      </div>
-      <div class="menu_grid_right">
-        <div id="m_logout" OnClick="location.href ='/auth/logout'" style="cursor:pointer;"><img src="/images/logout.png"></div>
+  <header>
+    <!-- start top -->
+    <div id="topnav" class="navbar navbar-fixed-top default">
+      <div class="navbar-inner">
+        <div class="container">
+          <div class="logo">
+            <a href="index.html"><img src="assets/img/h1ld_icon.png" alt="H1LD" width="35px"/></a>
+          </div>
+          <div class="navigation">
+            <nav>
+              <ul class="nav pull-right">
+                <li class="current"><a href="#intro">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#services">Services</a></li>
+              </ul>
+            </nav>
+          </div>
+          <!--/.nav-collapse -->
+        </div>
       </div>
     </div>
-    <div class="main_grid">
-      <div id="main">
-        <img class="mainimage" src="/images/index.jpg" width="100%" height="100%">
-        <div id="TTT"><div id="header">Time To Teamplay</div><div id="main_body">the best time management web app</div></div>
+    <!-- end top -->
+  </header>
+  <!-- section intro -->
+  <section id="intro">
+    <div class="slogan">
+      <div class="icon">
+        <img src="assets/img/h1ld_logo.png" alt="H1LD" width="200px"/>
+      </div>
+      <h1>Welcome to <span>H1LD</span> creative studio</h1>
+      <h2>He1lo worLD; Hea1 the worLD</h2>
+    </div>
+  </section>
+  <!-- end intro -->
+  <!-- Section about -->
+  <section id="about" class="section">
+    <div class="container">
+      <div class="row">
+        <div class="span12">
+          <div class="heading">
+            <h3><span>About us</span></h3>
+          </div>
+          <div class="sub-heading">
+            <p>
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="span3">
+          <img src="assets/img/hav1n.png" alt="" class="img-polaroid" width="300px"/>
+          <div class="roles">
+            <h5><strong>Hav1n</strong></h5>
+            <p>
+              양호정 Korea Univ. CYDF 16
+            </p>
+            <ul class="social-profile">
+              <li><a href="https://github.com/hav1n" target="_blank"><i class="icon-github icon-32 icon-circled"></i></a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="span3">
+          <img src="assets/img/lomotos.jpeg" alt="" class="img-polaroid" width="300px"/>
+          <div class="roles">
+            <h5><strong>LOMOTOS</strong></h5>
+            <p>
+              한성수 KAIST EE 16
+            </p>
+            <ul class="social-profile">
+              <li><a href="https://github.com/lomotos10" target="_blank"><i class="icon-github icon-32 icon-circled"></i></a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="span3">
+          <img src="assets/img/1yong.png" alt="" class="img-polaroid" width="300px"/>
+          <div class="roles">
+            <h5><strong>1yong</strong></h5>
+            <p>
+              서원용 KAIST EE 16
+            </p>
+            <ul class="social-profile">
+              <li><a href="https://github.com/alskdj90" target="_blank"><i class="icon-github icon-32 icon-circled"></i></a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="span3">
+          <img src="assets/img/dkmv.jpg" alt="" class="img-polaroid" width="300px"/>
+          <div class="roles">
+            <h5><strong>DKMV</strong></h5>
+            <p>
+              고강욱 KAIST EE 16
+            </p>
+            <ul class="social-profile">
+              <li><a href="https://github.com/dkmv0623" target="_blank"><i class="icon-github icon-32 icon-circled"></i></a></li>
+            </ul>
+          </div>
+        </div>
       </div>
     </div>
-    <div class="tails">
-      Gaenodab Co. | <img src="/images/mail1.png" height="15px" width="15px" style="margin-top:5px;">
-      hav1n.allday@gmail.com | Copyright 2019
+  </section>
+  <!-- end section about -->
+  <!-- section services -->
+  <section id="services" class="section parallax dark">
+    <div class="container">
+      <div class="row">
+        <div class="span12">
+          <div class="heading">
+            <h3><span>Services</span></h3>
+          </div>
+          <div class="sub-heading">
+            <p>
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="span3">
+          <div class="box aligncenter">
+            <div class="halftop">
+              <h4><strong>Time To Teamplay - TTT</strong></h4>
+              <img src="assets/img/TTT_thumbnail.png" width="55px" style="margin-bottom:0px">
+            </div>
+            <p>
+              Time management web application.
+            </p>
+            <a href="http://hav1n.kr/TTT" target="_blank" class="btn btn-theme">Go to homepage</a>
+          </div>
+        </div>
+        <div class="span3">
+          <div class="box aligncenter">
+            <div class="halftop">
+              <h4><strong>Pictour</strong></h4>
+              <img src="assets/img/pictour_thumbnail.png" width="55px" style="margin-bottom:0px">
+            </div>
+            <p>
+              Remember your tour with pictures.
+            </p>
+            <a href="#" class="btn btn-theme">Comming Soon!</a>
+          </div>
+        </div>
+        <div class="span3">
+          <div class="box aligncenter">
+            <div class="halftop">
+              <h4><strong>?</strong></h4>
+              <i class="icon-mobile-phone icon-4x"></i>
+            </div>
+            <p>
+              Comming soon! Maybe..?
+            </p>
+            <a href="#" class="btn btn-theme">Nothing Here</a>
+          </div>
+        </div>
+        <div class="span3">
+          <div class="box aligncenter">
+            <div class="halftop">
+              <h4><strong>?</strong></h4>
+              <i class="icon-beaker icon-4x"></i>
+            </div>
+            <p>
+              Comming soon! Maybe..?
+            </p>
+            <a href="#" class="btn btn-theme">Nothing Here</a>
+          </div>
+        </div>
+      </div>
     </div>
-  </div>
+  </section>
+  <!-- end section services -->
+
+  <footer>
+    <div class="verybottom">
+      <div class="container">
+        <div class="row">
+          <div class="span12">
+            <div class="aligncenter">
+              <div class="logo">
+                <a class="brand" href="index.html"><img src="assets/img/h1ld_icon.png" alt="" width="50px"/></a>
+              </div>
+              <p>
+                &copy; Team H1LD - All right reserved | hav1n.allday@gmail.com
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+  <a href="#" class="scrollup"><i class="icon-chevron-up icon-square icon-48 active"></i></a>
+
+  <!-- Javascript Library Files -->
+  <script src="assets/js/jquery.min.js"></script>
+  <script src="assets/js/jquery.easing.js"></script>
+  <script src="assets/js/bootstrap.js"></script>
+  <script src="assets/js/parallax/jquery.parallax-1.1.3.js"></script>
+  <script src="assets/js/nagging-menu.js"></script>
+  <script src="assets/js/jquery.nav.js"></script>
+  <script src="assets/js/prettyPhoto/jquery.prettyPhoto.js"></script>
+  <script src="assets/js/portfolio/jquery.quicksand.js"></script>
+  <script src="assets/js/portfolio/setting.js"></script>
+  <script src="assets/js/hover/jquery-hover-effect.js"></script>
+  <script src="assets/js/jquery.scrollTo.min.js"></script>
+  <script src="assets/js/animate.js"></script>
+
+  <!-- Contact Form JavaScript File -->
+  <script src="contactform/contactform.js"></script>
+
+  <!-- Template Custom Javascript File -->
+  <script src="assets/js/custom.js"></script>
+
 </body>
+
 </html>
