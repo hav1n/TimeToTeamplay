@@ -35,7 +35,7 @@ app.use(session({
 app.use(passport.initialize())
 app.use(passport.session())
 app.use(flash())
-app.use(favicon(path.join(__dirname, 'public/images', 'favicon.ico')))
+app.use(favicon(path.join(__dirname, 'public/assets', 'favicon.ico')))
 
 function addZero(data){
 return (data<10) ? "0"+data : data;
@@ -63,7 +63,13 @@ app.use('/calendar', calendarRouter)
 app.use('/mypage', pageRouter)
 app.use('/about', aboutRouter)
 
-app.get('/', function(request, response){
+app.get('/',function(request, response){
+  fs.readFile(`./html/index.html`,'utf8',function(err,body){
+    response.send(body)
+  })
+})
+
+app.get('/TTT', function(request, response){
   if(LIB.authIsOwner(request, response)){
     response.redirect('/main')
     return
@@ -85,7 +91,7 @@ app.get('/main', function(request, response){
     response.redirect('/')
     return
   }
-  fs.readFile(`./html/index.html`, 'utf8', function(err, body){
+  fs.readFile(`./html/main.html`, 'utf8', function(err, body){
     response.send(body)
   })
 })
