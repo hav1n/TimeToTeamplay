@@ -8,7 +8,7 @@ var shortid = require('shortid')
 
 router.get('/', function(request, response){
   if(!LIB.authIsOwner(request, response)){
-    response.redirect('/')
+    response.redirect('/TTT')
     return
   }
   var user_id = request.user.id
@@ -37,7 +37,7 @@ router.get('/', function(request, response){
 
 router.get('/User/:page', function(request, response){
   if(!LIB.authIsOwner(request, response)){
-    response.redirect('/')
+    response.redirect('/TTT')
     return
   }
   var page = request.params.page
@@ -50,7 +50,7 @@ router.get('/User/:page', function(request, response){
 
 router.get('/create', function(request, response){
   if(!LIB.authIsOwner(request, response)){
-    response.redirect('/')
+    response.redirect('/TTT')
     return
   }
   var user_id = request.user.id
@@ -61,7 +61,7 @@ router.get('/create', function(request, response){
 
 router.post('/create_table', function(request, response){
   if(!LIB.authIsOwner(request, response)){
-    response.redirect('/')
+    response.redirect('/TTT')
     return
   }
   var post = request.body
@@ -88,7 +88,7 @@ router.post('/create_table', function(request, response){
 
 router.get('/update/:page',function(request,response){
   if(!LIB.authIsOwner(request, response)){
-    response.redirect('/')
+    response.redirect('/TTT')
     return
   }
   var tables = db.get('tables').find({id:request.params.page}).value()
@@ -108,7 +108,7 @@ router.get('/update/:page',function(request,response){
 
 router.post('/update_table',function(request,response){
   if(!LIB.authIsOwner(request, response)){
-    response.redirect('/')
+    response.redirect('/TTT')
     return
   }
   var post = request.body
@@ -129,7 +129,7 @@ router.post('/update_table',function(request,response){
 
 router.get('/delete/:page', function(request, response){
   if(!LIB.authIsOwner(request, response)){
-    response.redirect('/')
+    response.redirect('/TTT')
     return
   }
   var tables = db.get('tables').find({id:request.params.page}).value()

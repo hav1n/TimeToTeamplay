@@ -23,7 +23,7 @@ function makeTimeString(timestamp) {
 
 router.get('/', function(request, response){
   if(!LIB.authIsOwner(request, response)){
-    response.redirect('/')
+    response.redirect('/TTT')
     return
   }
   var user_id = request.user.id
@@ -103,7 +103,7 @@ router.get('/', function(request, response){
 
 router.get('/dm', function(request, response){
   if(!LIB.authIsOwner(request, response)){
-    response.redirect('/')
+    response.redirect('/TTT')
     return
   }
   var user_id = request.user.id
@@ -121,7 +121,7 @@ router.get('/dm', function(request, response){
 
 router.post('/dm_send',function(request, response){
   if(!LIB.authIsOwner(request, response)){
-    response.redirect('/')
+    response.redirect('/TTT')
     return
   }
   var user_id = request.user.id

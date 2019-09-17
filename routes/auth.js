@@ -49,19 +49,19 @@ passport.use(new LocalStrategy(
 
 router.get('/logout', function (request, response) {
   if(!LIB.authIsOwner(request, response)){
-    response.redirect('/')
+    response.redirect('/TTT')
     return
   }
   request.logout()
   request.session.save(function(err){
-    response.redirect('/')
+    response.redirect('/TTT')
   })
 })
 
 router.post('/login_process'
   ,passport.authenticate('local', {
     successRedirect: '/main',
-    failureRedirect: '/',
+    failureRedirect: '/TTT',
     failureFlash: true
 }))
 
@@ -102,7 +102,7 @@ router.post('/register_process',function(request, response){
       }
       db.get('users').push(user).write()
       request.login(user, function (err) {
-        return response.redirect('/')
+        return response.redirect('/TTT')
       })
     })
   }
@@ -137,7 +137,7 @@ router.post('/find_process',function(request, response){
   } else {
     bcrypt.hash(user_pw, 10, function (err, hash) {
       db.get('users').find({id:user_id, name:user_name}).assign({pw:hash}).write()
-      response.redirect('/')
+      response.redirect('/TTT')
     })
   }
 })

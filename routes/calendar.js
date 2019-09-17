@@ -5,7 +5,7 @@ var LIB = require('../js/lib.js')
 
 router.get('/', function(request, response){
   if(!LIB.authIsOwner(request, response)){
-    response.redirect('/')
+    response.redirect('/TTT')
     return
   }
   fs.readFile(`html/calendar.html`, 'utf8', function(err, body){
