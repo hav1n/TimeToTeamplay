@@ -88,7 +88,7 @@ app.get('/TTT', function(request, response){
 
 app.get('/main', function(request, response){
   if(!LIB.authIsOwner(request, response)){
-    response.redirect('/')
+    response.redirect('/TTT')
     return
   }
   fs.readFile(`./html/main.html`, 'utf8', function(err, body){
