@@ -6,7 +6,7 @@ var fs = require('fs')
 
 router.get('/', function(request, response){
   if(!LIB.authIsOwner(request, response)){
-    response.redirect('/')
+    response.redirect('/TTT')
     return
   }
   fs.readFile(`html/about.html`, 'utf8', function(err, body){

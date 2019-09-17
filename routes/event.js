@@ -8,7 +8,7 @@ var shortid = require('shortid')
 
 router.get('/User/:page', function(request, response){
   if(!LIB.authIsOwner(request, response)){
-    response.redirect('/')
+    response.redirect('/TTT')
     return
   }
   var page = request.params.page
@@ -87,7 +87,7 @@ router.get('/User/:page', function(request, response){
 
 router.get('/make', function(request, response){
   if(!LIB.authIsOwner(request, response)){
-    response.redirect('/')
+    response.redirect('/TTT')
     return
   }
   var user_id = request.user.id
@@ -99,7 +99,7 @@ router.get('/make', function(request, response){
 
 router.post('/make_event',function(request, response){
   if(!LIB.authIsOwner(request, response)){
-    response.redirect('/')
+    response.redirect('/TTT')
     return
   }
   var post = request.body
@@ -120,7 +120,7 @@ router.post('/make_event',function(request, response){
 
 router.get('/join',function(request, response){
   if(!LIB.authIsOwner(request, response)){
-    response.redirect('/')
+    response.redirect('/TTT')
     return
   }
   var user_id = request.user.id
@@ -132,7 +132,7 @@ router.get('/join',function(request, response){
 
 router.post('/join_event',function(request, response){
   if(!LIB.authIsOwner(request, response)){
-    response.redirect('/')
+    response.redirect('/TTT')
     return
   }
   var post = request.body
@@ -140,11 +140,11 @@ router.post('/join_event',function(request, response){
   var events = db.get('events').find({id:id}).value()
   if(!events){
     request.flash('error', 'Wrong ID!')
-    return response.redirect('/')
+    return response.redirect('/TTT')
   }
   if(events.part.includes(request.user.id)){
     request.falsh('error', 'Already participated')
-    return response.redirect('/')
+    return response.redirect('/TTT')
   }
   events.part.push(request.user.id)
   events.table.push("0")
@@ -156,7 +156,7 @@ router.post('/join_event',function(request, response){
 
 router.post('/update/:page',function(request, response){
   if(!LIB.authIsOwner(request, response)){
-    response.redirect('/')
+    response.redirect('/TTT')
     return
   }
   var eid = request.params.page
@@ -179,13 +179,13 @@ router.post('/update/:page',function(request, response){
 
 router.get('/delete/:page',function(request,response){
   if(!LIB.authIsOwner(request, response)){
-    response.redirect('/')
+    response.redirect('/TTT')
     return
   }
   var events = db.get('events').find({id:request.params.page}).value()
   if(events.owner !== request.user.id){
     request.flash('error', 'You are not owner!')
-    return response.redirect('/')
+    return response.redirect('/TTT')
   }
   db.get('events').remove({id:request.params.page}).write()
   response.redirect('/table')
