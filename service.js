@@ -21,6 +21,7 @@ var authRouter = require('./routes/auth.js')
 var calendarRouter = require('./routes/calendar.js')
 var pageRouter = require('./routes/mypage.js')
 var aboutRouter = require('./routes/about.js')
+var nuemRouter = require('./routes/NuEm.js')
 var helmet = require('helmet')
 
 app.use(helmet())
@@ -62,6 +63,7 @@ app.use('/auth', authRouter)
 app.use('/calendar', calendarRouter)
 app.use('/mypage', pageRouter)
 app.use('/about', aboutRouter)
+app.use('/NuEm', nuemRouter)
 
 app.get('/',function(request, response){
   fs.readFile(`./html/index.html`,'utf8',function(err,body){

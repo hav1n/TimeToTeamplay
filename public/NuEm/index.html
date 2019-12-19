@@ -1,0 +1,41 @@
+﻿<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>NuEm - hav1n.kr</title>
+  </head>
+  <body>
+    <p style="text-align:center;font-size:30px">
+      0.
+      <br>☆본격 누엠 사전컨텐츠★
+    </p>
+    <p style="text-align:center;font-size:15px">
+      <ul>
+        <li>문제는 총 21문제입니다.</li>
+        <li>정답을 쓸 때는 영어는 소문자로, 띄어쓰기는 빼고 적어주세요.</li>
+        <li>퀴즈 풀다가 문제 번호가 갑자기 뛰면 전문제 틀린거니까 양심적으로 돌아가서 풀어주세요 제발루다가</li>
+      </ul>
+    </p>
+    <p style="text-align:center;font-size:30px">
+      준비가 되셨다면 정답에 누더의 사람 수를 입력해주세요.
+    </p>
+    <p style="text-align: center;">
+      <img src="images/0.jpg" width="50%"/>
+    </p>
+    <script>
+      var lnk2 = ".html"
+      function b64EncodeUnicode(str) {
+          return btoa(encodeURIComponent(str).replace(/%([0-9A-F]{2})/g,
+              function toSolidBytes(match, p1) {
+                  return String.fromCharCode('0x' + p1);
+          }));
+      }
+      function gourl(){lnk=b64EncodeUnicode(document.Form.id.value);document.Form.action = lnk+lnk2}
+    </script>
+    <form name="Form" onSubmit="gourl();" style="text-align:center;" method="post">
+      정답:
+      <input type="text" name="id"/>
+      <input type="submit"/>
+    </form>
+  </body>
+</html>
