@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>NuEm - hav1n.kr</title>
+  </head>
+  <body>
+    <p style="text-align:center;font-size:30px">
+      10.
+    <br>이 친구가 이 날 기숙사에서 채현이에게 수모를 당하는 모습이 영상으로 기록되자
+    <br>송채현은 1주동안 보복의 공포에 두려워 잠을 설쳤다고 한다.
+
+    </p>
+    <p style="text-align: center;">
+      <img src="images/10-1.png" width="50%"/>
+      <br>
+      <img src="images/10-2.png" width="25%"/>
+    </p>
+    <script>
+      var lnk2 = ".html"
+      function b64EncodeUnicode(str) {
+          return btoa(encodeURIComponent(str).replace(/%([0-9A-F]{2})/g,
+              function toSolidBytes(match, p1) {
+                  return String.fromCharCode('0x' + p1);
+          }));
+      }
+      function gourl(){lnk=b64EncodeUnicode(document.Form.id.value);document.Form.action = lnk+lnk2}
+    </script>
+    <form name="Form" onSubmit="gourl();" style="text-align:center;" method="post">
+      정답:
+      <input type="text" name="id"/>
+      <input type="submit"/>
+    </form>
+  </body>
+</html>

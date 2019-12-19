@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>NuEm - hav1n.kr</title>
+  </head>
+  <body>
+    <p style="text-align:center;font-size:30px">
+      16.
+    <br>우리에게 창주보다 더익숙한 창주동생.
+    <br>본인의 인싸력도 있지만 구지민주아 버프까지 받아 이제는 그의 이름을 모르는 누더가 없다.
+    <br>우리가 익숙한 대로 성은 빼고 이름만 적도록 하자.
+
+    </p>
+    <script>
+      var lnk2 = ".html"
+      function b64EncodeUnicode(str) {
+          return btoa(encodeURIComponent(str).replace(/%([0-9A-F]{2})/g,
+              function toSolidBytes(match, p1) {
+                  return String.fromCharCode('0x' + p1);
+          }));
+      }
+      function gourl(){lnk=b64EncodeUnicode(document.Form.id.value);document.Form.action = lnk+lnk2}
+    </script>
+    <form name="Form" onSubmit="gourl();" style="text-align:center;" method="post">
+      정답:
+      <input type="text" name="id"/>
+      <input type="submit"/>
+    </form>
+  </body>
+</html>

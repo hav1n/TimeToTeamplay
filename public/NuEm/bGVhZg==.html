@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>NuEm - hav1n.kr</title>
+  </head>
+  <body>
+    <p style="text-align:center;font-size:30px">
+      12.
+    <br>최민혁 주연, 이진원 이주아 조연
+    <br>당시 핫하던 '변호인'을 바탕으로 기숙사 정수기 라면 사태를 풍자하였다.
+    <br>학생과 사감의 첨예한 토론 연기가 감상 포인트.
+
+    </p>
+    <p style="text-align: center;">
+      <img src="images/12-1.png" width="30%"/>
+      <img src="images/12-2.png" width="30%"/>
+      <br>
+      <img src="images/12-3.png" width="30%"/>
+      <img src="images/12-4.png" width="30%"/>
+    </p>
+    <script>
+      var lnk2 = ".html"
+      function b64EncodeUnicode(str) {
+          return btoa(encodeURIComponent(str).replace(/%([0-9A-F]{2})/g,
+              function toSolidBytes(match, p1) {
+                  return String.fromCharCode('0x' + p1);
+          }));
+      }
+      function gourl(){lnk=b64EncodeUnicode(document.Form.id.value);document.Form.action = lnk+lnk2}
+    </script>
+    <form name="Form" onSubmit="gourl();" style="text-align:center;" method="post">
+      정답:
+      <input type="text" name="id"/>
+      <input type="submit"/>
+    </form>
+  </body>
+</html>

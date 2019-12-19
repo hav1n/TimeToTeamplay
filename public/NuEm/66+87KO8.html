@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>NuEm - hav1n.kr</title>
+  </head>
+  <body>
+    <p style="text-align:center;font-size:30px">
+      17.
+    <br>SRC 1층의 수호자이자 명예 현수파인 김종병의 의지를 받들어
+    <br>우리 모두 어언 6년만에 코이스터디 닷 넷에 접속해 보아
+    <br>종범이의 코이스터디 상메를 알아보는 시간을 갖도록 합시다.
+    <br>이 문제는 정답형식 안맞추고 그냥 복붙하시면 됩니다.
+
+    </p>
+    <p style="text-align: center;">
+      <img src="images/17.png" width="300"/>
+    </p>
+    <script>
+      var lnk2 = ".html"
+      function b64EncodeUnicode(str) {
+          return btoa(encodeURIComponent(str).replace(/%([0-9A-F]{2})/g,
+              function toSolidBytes(match, p1) {
+                  return String.fromCharCode('0x' + p1);
+          }));
+      }
+      function gourl(){lnk=b64EncodeUnicode(document.Form.id.value);document.Form.action = lnk+lnk2}
+    </script>
+    <form name="Form" onSubmit="gourl();" style="text-align:center;" method="post">
+      정답:
+      <input type="text" name="id"/>
+      <input type="submit"/>
+    </form>
+  </body>
+</html>

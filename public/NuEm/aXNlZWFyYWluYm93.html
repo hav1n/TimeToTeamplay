@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>NuEm - hav1n.kr</title>
+  </head>
+  <body>
+    <p style="text-align:center;font-size:30px">
+      7.
+    <br>'SRC2'의 주인공 이경태의 명대사.
+    <br>전작 'SRC'의 'James' 역 이진원에게서 오마주해온 대사이다.
+    <br>이 장면은 심도높은 연기와 긴박한 영상미의 조화로 하여금 긴장을 일으키게 된다.
+
+    </p>
+    <p style="text-align: center;">
+      <img src="images/7-1.png" width="50%"/>
+      <br>
+      <img src="images/7-2.png" width="25%"/>
+    </p>
+    <script>
+      var lnk2 = ".html"
+      function b64EncodeUnicode(str) {
+          return btoa(encodeURIComponent(str).replace(/%([0-9A-F]{2})/g,
+              function toSolidBytes(match, p1) {
+                  return String.fromCharCode('0x' + p1);
+          }));
+      }
+      function gourl(){lnk=b64EncodeUnicode(document.Form.id.value);document.Form.action = lnk+lnk2}
+    </script>
+    <form name="Form" onSubmit="gourl();" style="text-align:center;" method="post">
+      정답:
+      <input type="text" name="id"/>
+      <input type="submit"/>
+    </form>
+  </body>
+</html>
